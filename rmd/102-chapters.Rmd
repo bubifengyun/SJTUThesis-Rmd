@@ -1,0 +1,38 @@
+# 各章格式说明 {#chap:chapters}
+
+文件名采用如下方式， *xxx-name.Rmd*。其中 `xxx` 表示从 `000` 到 `999`，第一位表示第几部分，后两位表示章节。`name` 是对应章节的名字。一章一个文件。
+
+由于自身水平所限，部分格式实现起来费劲，就采用直接书写 LaTeX 代码的形式实现了。
+
+## 摘要
+
+为了实现摘要从 latex 变为 rmd，经过仔细阅读 *./sjtuthesis.cls* 文件，发现摘要如下写即可。且命名必须从 000 开始，确保在最开头。
+
+\begin{lstlisting}[basicstyle=\small\ttfamily,caption={模板文件布局},label=layout,numbers=none]
+\frontmatter
+\pagestyle{main}
+
+\abstract
+
+上海交通大学是我国历史最悠久的高等学府之一。
+
+\keywords{\large 上海交大 \quad 饮水思源 \quad 爱国荣校}
+
+\englishabstract
+
+An imperial edict issued in 1896 by Emperor Guangxu, established Nanyang Public School in Shanghai.
+
+\englishkeywords{\large SJTU, Thesis, Rmarkdown/Bookdown template}
+
+\include{latex/content}
+
+\end{lstlisting}
+
+最开头
+
+```
+\frontmatter
+\pagestyle{main}
+```
+
+用于说明。。。

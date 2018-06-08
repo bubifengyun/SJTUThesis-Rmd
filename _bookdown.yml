@@ -1,6 +1,6 @@
 book_filename: sjtu-thesis-rmd
 rmd_subdir: TRUE
-clean: [book.bib]
+clean: [bib/thesis.bib]
 delete_merged_file: TRUE
 language:
   label:
