@@ -8,7 +8,7 @@
 
 为了实现摘要从 latex 变为 rmd，经过仔细阅读 *./sjtuthesis.cls* 文件，发现摘要如下写即可。且命名必须从 000 开始，确保在最开头。
 
-\begin{lstlisting}[basicstyle=\small\ttfamily,caption={模板文件布局},label=layout,numbers=none]
+\begin{lstlisting}[basicstyle=\small\ttfamily,caption={模板文件布局},label=layout1,numbers=none]
 \frontmatter
 \pagestyle{main}
 
