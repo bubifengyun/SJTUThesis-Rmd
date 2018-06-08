@@ -5,7 +5,7 @@
 
 这是上海交通大学(非官方)学位论文 Bookdown 模板，当前处于草稿期 。
 
-据最新[2018-06-08]的[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)， 参考[谢益辉Bookdown中文模板](https://github.com/yihui/bookdown-chinese)改写而成。其中图片，代码等问题尚未解决。但是能够编译成书了。
+据最新[2018-06-08]的[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)， 参考[谢益辉Bookdown中文模板](https://github.com/yihui/bookdown-chinese)改写而成 \cite{xie2015}。其中图片，代码等问题尚未解决。但是能够编译成书了\cite{IEEE-1363}。
 
 ## 模板使用
 
