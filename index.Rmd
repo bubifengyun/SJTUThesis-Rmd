@@ -1,0 +1,41 @@
+```{r setup, include=FALSE}
+locale = Sys.setlocale(category = "LC_TIME", locale = 'en_US.UTF-8')
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2, width = 55, digits = 4
+)
+if (!length(getOption('repos'))) options(repos = c(CRAN = 'https://cran.rstudio.com'))
+# 填上你需要用到的包，如 c('ggplot2', 'dplyr')
+lapply(c('DT', 'citr', 'formatR', 'svglite', 'webshot'), function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
+--- 
+title: "上海交通大学论文 Rmd bookdown 模板"
+author: "某某"
+documentclass: sjtuthesis
+classoption: [doctor, openright, twoside]
+studentnumber: B1103492
+school: "上海交通大学"
+advisor: "深度操作系统"
+major: "通信与信息系统"
+defenddate: "`r format(Sys.Date(),format='%Y年%m月%d日')`"
+date: "`r format(Sys.Date(),format='%Y年%m月%d日')`"
+englishauthor: "Mou Mou"
+englishadvisor: "Deepin"
+englishinstitute: "Deepin OS"
+englishdate: "`r format(Sys.Date(),format='%b. %d, %Y')`"
+englishtitle: "SJTU Bookdown Template"
+englishmajor: "Comminucation and Information Tech"
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+site: bookdown::bookdown_site
+description: "深度操作系统的简单介绍"
+github-repo: bubifengyun/SJTUThesis-Rmd
+cover-image: images/cover.jpg
+---
+
+

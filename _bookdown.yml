@@ -1,0 +1,12 @@
+book_filename: sjtu-thesis-rmd
+rmd_subdir: TRUE
+clean: [book.bib]
+delete_merged_file: TRUE
+language:
+  label:
+    fig: "图 "
+    tab: "表 "
+  ui:
+    edit: "编辑"
+    chapter_name: ["第 ", " 章"]
+

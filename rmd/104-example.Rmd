@@ -1,0 +1,65 @@
+# 各种例子 {#chap:example}
+
+$$x+y=z$$
+
+from:https://github.com/rstudio/rmarkdown/issues/644
+
+\begin{equation}
+f(x;\mu,\sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2 }\label{eq:equation2}
+\end{equation}
+
+$x+y=z$
+
+来自：https://stackoverflow.com/questions/27081054/r-markdown-math-equation-alignment
+
+$$
+\begin{aligned}
+ AR(p): Y_i &= c + \epsilon_i + \phi_i Y_{i-1} \dots \\
+ Y_{i} &= c + \phi_i Y_{i-1} \dots
+\end{aligned}
+$$
+
+来自：http://statpower.net/Content/310/R%20Stuff/SampleMarkdown.html
+
+$$\mathbf{X} = \left[\begin{array}
+{rrr}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{array}\right]
+$$
+
+如表 \@ref(tab:tab-single) 所示，这里是插入表格的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r table-single, tidy=FALSE, echo=FALSE}`
+
+
+```{r tab-single, tidy=FALSE}
+knitr::kable(
+  head(mtcars[, 1:8], 10), booktabs = TRUE,
+  caption = 'A table of the first 10 rows of the mtcars data.'
+)
+```
+
+这里是插入图片的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r logo, out.width='32.8%', fig.show='hold', fig.cap='logo', fig.align="center, echo=FALSE"}`
+
+
+```{r logo, out.width='32.8%', fig.show='hold', fig.cap='logo', fig.align="center"}
+knitr::include_graphics("figure/sjtulogo.pdf")
+```
+
+摘自：[深度商业官网](https://www.deepin.com/)、[深度社区官网](https://www.deepin.org/)。已获[许可](https://bbs.deepin.org/forum.php?mod=viewthread&tid=39632&page=10#pid377474)。
+
+## 深度科技简介
+
+武汉深之度科技有限公司（简称：深度科技）成立于2011年，是专注基于Linux的国产操作系统研发与服务的商业公司。
+
+作为国内顶尖的操作系统研发团队，深度科技以提供安全可靠、美观易用的国产操作系统与开源解决方案为目标，拥有操作系统研发、行业定制、国际化、迁移和适配、交互设计、支持服务与培训等多方面专业人才，能够满足不同用户和应用场景对操作系统产品的广泛需求。
+
+![深度公司图片](figure/sjtulogo.pdf)
+
+深度科技作为国产操作系统生态的打造者，不但与各芯片、整机、中间件、数据库等厂商结成了紧密合作关系，还与360、金山、网易、搜狗等企业联合开发了多款符合中国用户需求的应用软件。深度科技的操作系统产品，已通过了公安部安全操作系统认证、工信部国产操作系统适配认证、入围国管局中央集中采购名录，并在国内党政军、金融、运营商、教育等客户中得到了广泛应用。
+
+截止到2016年，深度操作系统下载超过5000万次，提供32种不同的语言版本，以及遍布六大洲28个国家84个镜像站点的升级服务。在全球开源操作系统排行榜上，深度操作系统已跃居前十名，也是排名最高的中国操作系统产品。
+未来，深度科技将继续秉承开源和创新精神，以操作系统的自主可控替代为契机，争取在三年内成为中国市场主要操作系统供应商，五年后成为具备国际影响力的主流操作系统厂商。
+
+注：深度论坛网友 [licardo](https://bbs.deepin.org/forum.php?mod=viewthread&tid=145309&page=1#pid378170) 建议，`国产操作系统` 改为 `国内发行版`。深以为然。但是考虑到转帖的别人的文章，就保留不变了，特此说明。
+
