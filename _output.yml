@@ -3,7 +3,7 @@ bookdown::pdf_book:
   dev: "cairo_pdf"
   latex_engine: xelatex
   citation_package: biblatex
-  template: latex/template.tex
+  template: tex/template.tex
   pandoc_args: "--top-level-division=chapter"
   toc_depth: 3
   toc_unnumbered: no

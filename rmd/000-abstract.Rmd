@@ -35,6 +35,6 @@ Its total enrollment of students amounts to 35,929, of which 1,564 are internati
 
 \englishkeywords{\large SJTU, Thesis, Rmarkdown/Bookdown template}
 
-\include{latex/content}
+\include{tex/content}
 
 

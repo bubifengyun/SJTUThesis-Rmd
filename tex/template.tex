@@ -102,26 +102,26 @@ $body$
 
 % 盲审删去删去致谢页
 \ifsjtu@review\relax\else
-  \include{latex/ack} 	  %% 致谢
+  \include{tex/ack} 	  %% 致谢
 \fi
 
 \ifsjtu@bachelor
   % 学士学位论文要求在最后有一个英文大摘要，单独编页码
   \pagestyle{biglast}
-  \include{latex/end_english_abstract}
+  \include{tex/end_english_abstract}
 \else
   % 盲审论文中，发表学术论文及参与科研情况等仅以第几作者注明即可，不要出现作者或他人姓名
   \ifsjtu@review\relax
-    \include{latex/pubreview}
-    \include{latex/projectsreview}  
+    \include{tex/pubreview}
+    \include{tex/projectsreview}  
   \else
-    \include{latex/pub}	      %% 发表论文
-    \include{latex/projects}  %% 参与的项目
+    \include{tex/pub}	      %% 发表论文
+    \include{tex/projects}  %% 参与的项目
   \fi
 \fi
 
-% \include{latex/patents}	  %% 申请专利
-% \include{latex/resume}	  %% 个人简历
+% \include{tex/patents}	  %% 申请专利
+% \include{tex/resume}	  %% 个人简历
 
 \makeatother
 

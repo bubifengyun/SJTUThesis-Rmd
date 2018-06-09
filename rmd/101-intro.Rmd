@@ -63,27 +63,33 @@ make
 \end{lstlisting}
 
 在已经安装 RStudio 的前提下，也可手动编译。打开 RStudio 软件，在弹出的界面，左上角点击 File->Open Project，选中 *./SJTUThesis-Rmd.Rproj* 文件打开，点击右上角靠下的一栏，有个 `Build` 格，会出现 `Build Book` 等按钮。
-点击 `Build Book` 就会生成 PDF 书籍了，位于 *./_book/sjtu-thesis-rmd.pdf* 。
+点击 `Build Book` 就会生成 PDF 书籍了，位于 *./\_book/sjtu-thesis-rmd.pdf* 。
 
 ### 文件布局
 
 使用 `tree` 命令所得。
 \begin{lstlisting}[basicstyle=\small\ttfamily,caption={模板文件布局},label=layout,numbers=none]
+├── bib
+│   └── thesis.bib
 ├── _book
 │   ├── sjtu-thesis-rmd.pdf
 │   └── sjtu-thesis-rmd.tex
-├── book.bib
 ├── _bookdown_files
 ├── _bookdown.yml
-├── css
-│   └── style.css
 ├── figure
+│   ├── example
+│   │   ├── flow_chart.tex
+│   │   ├── sjtulogo.eps
+│   │   ├── sjtulogo.jpg
+│   │   └── sjtulogo.png
+│   ├── sjtubadge.pdf
+│   ├── sjtubanner.pdf
 │   └── sjtulogo.pdf
 ├── handed_pdf
 │   ├── authorization.pdf
 │   └── original.pdf
 ├── index.Rmd
-├── latex
+├── tex
 │   ├── ack.tex
 │   ├── content.tex
 │   ├── end_english_abstract.tex
@@ -102,9 +108,10 @@ make
 │   ├── 001-symbol.Rmd
 │   ├── 003-author.Rmd
 │   ├── 101-intro.Rmd
-│   ├── 102-rmarkdown.Rmd
+│   ├── 102-chapters.Rmd
 │   ├── 103-latex.Rmd
-│   ├── 104-example.Rmd
+│   ├── 104-rmarkdown.Rmd
+│   ├── 105-example.Rmd
 │   ├── 601-appendix-bookdown.Rmd
 │   ├── 602-appendix-tale.Rmd
 │   ├── 603-appendix-history.Rmd
@@ -112,14 +119,23 @@ make
 ├── sjtuthesis.cfg
 ├── sjtuthesis.cls
 └── SJTUThesis-Rmd.Rproj
+
 \end{lstlisting}
 
 ### 主要文件介绍
 
 #### LaTeX 模板文件
 
-格式控制文件控制着论文的表现形式，包括sjtuthesis.cfg和sjtuthesis.cls。
+格式控制文件控制着论文的表现形式，包括 *./sjtuthesis.cfg* 和 *./sjtuthesis.cls*。
 其中，“cls”控制论文主体格式，“cfg”为配置文件。上述文件全部来自[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)
 
 #### 各章源文件
 
+主要位于 *./rmd/* 文件夹。由于现阶段部分功能实现不全，暂且把部分内容以 latex 形式存放在 *./tex/* 文件夹下。
+
+#### 配置文件
+
+主要有
+
+- _bookdown.yml
+- _output.yml

@@ -8,7 +8,7 @@
 
 为了实现摘要从 latex 变为 rmd，经过仔细阅读 *./sjtuthesis.cls* 文件，发现摘要如下写即可。且命名必须从 000 开始，确保在最开头。
 
-\begin{lstlisting}[basicstyle=\small\ttfamily,caption={模板文件布局},label=layout1,numbers=none]
+\begin{lstlisting}[language={Tex}, caption={摘要代码框架示例}, label=sec:frontword]
 \frontmatter
 \pagestyle{main}
 
@@ -24,15 +24,30 @@ An imperial edict issued in 1896 by Emperor Guangxu, established Nanyang Public 
 
 \englishkeywords{\large SJTU, Thesis, Rmarkdown/Bookdown template}
 
-\include{latex/content}
+\include{tex/content}
 
 \end{lstlisting}
 
-最开头
+第1，2行
 
-```
-\frontmatter
-\pagestyle{main}
-```
 
 用于说明。。。
+
+## 正文第一章
+
+\begin{lstlisting}[language={Tex}, caption={正文代码框架示例}, label=sec:mainpage]
+\mainmatter
+\pagestyle{main}
+# 这是什么 {#chap:intro}
+这是上海交通大学(非官方)学位论文 Bookdown 模板，当前处于草稿期 。
+\end{lstlisting}
+
+## 附录第一章
+
+\begin{lstlisting}[language={Tex}, caption={正文代码框架示例}, label=sec:appendix]
+\appendix
+# bookdown 入门简介 {#bookdown-intro}
+\end{lstlisting}
+
+## 后缀第一部分
+
