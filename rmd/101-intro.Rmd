@@ -24,7 +24,7 @@
 下面以深度操作系统15.5版本为例说明。安装过程中，请确保当前 `rstudio` 的版本高于 1.0.0, texlive 为2015年及之后的版本。
 
 ```bash
-$ sudo apt-get install r-base r-base-dev \
+sudo apt-get install r-base r-base-dev \
 rstudio texlive-full pandoc
 ```
 
@@ -52,14 +52,26 @@ sjtuthesis-rmd 提供了一些常用选项，可以组合使用，在 *./index.R
 
 模板默认使用GNUMake构建，
 
-```bash
-$ make
+```{.bash}
+$\$$ make
 ```
 
-换到原始方式，
+换种写法，
+
+```bash
+$\$$ make
+```
+
+```bash
+$\#$ make
+```
+
+```{.bash numbers=none caption="这是有标题的，注释语句" label=code:make}
+# make
+```
 
 \begin{lstlisting}[basicstyle=\small\ttfamily, caption={编译模板}, numbers=none]
-make
+  make
 \end{lstlisting}
 
 在已经安装 RStudio 的前提下，也可手动编译。打开 RStudio 软件，在弹出的界面，左上角点击 File->Open Project，选中 *./SJTUThesis-Rmd.Rproj* 文件打开，点击右上角靠下的一栏，有个 `Build` 格，会出现 `Build Book` 等按钮。
