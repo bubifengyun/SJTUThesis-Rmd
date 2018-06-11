@@ -23,8 +23,8 @@
 
 下面以深度操作系统15.5版本为例说明。安装过程中，请确保当前 `rstudio` 的版本高于 1.0.0, texlive 为2015年及之后的版本。
 
-```bash
-sudo apt-get install r-base r-base-dev \
+```{.bash numbers=none}
+$\$$ sudo apt-get install r-base r-base-dev \
 rstudio texlive-full pandoc
 ```
 
@@ -38,7 +38,7 @@ rstudio texlive-full pandoc
 
 略
 
-### 模板选项
+### 模板选项 {#intro:options}
 
 sjtuthesis-rmd 提供了一些常用选项，可以组合使用，在 *./index.Rmd* 文件中配置。具体配置方法，见后文。
 这些选项包括：
@@ -50,29 +50,11 @@ sjtuthesis-rmd 提供了一些常用选项，可以组合使用，在 *./index.R
 
 ### 编译模板
 
-模板默认使用GNUMake构建，
+模板默认使用GNUMake构建，后续如无特殊说明，默认执行命令的文件夹以及当前文件夹均为本模板的根目录。
 
-```{.bash}
+```{.bash numbers=none}
 $\$$ make
 ```
-
-换种写法，
-
-```bash
-$\$$ make
-```
-
-```bash
-$\#$ make
-```
-
-```{.bash numbers=none caption="这是有标题的，注释语句" label=code:make}
-# make
-```
-
-\begin{lstlisting}[basicstyle=\small\ttfamily, caption={编译模板}, numbers=none]
-  make
-\end{lstlisting}
 
 在已经安装 RStudio 的前提下，也可手动编译。打开 RStudio 软件，在弹出的界面，左上角点击 File->Open Project，选中 *./SJTUThesis-Rmd.Rproj* 文件打开，点击右上角靠下的一栏，有个 `Build` 格，会出现 `Build Book` 等按钮。
 点击 `Build Book` 就会生成 PDF 书籍了，位于 *./\_book/sjtu-thesis-rmd.pdf* 。
@@ -80,7 +62,7 @@ $\#$ make
 ### 文件布局
 
 使用 `tree` 命令所得。
-\begin{lstlisting}[basicstyle=\small\ttfamily,caption={模板文件布局},label=layout,numbers=none]
+```{.latex caption="模板文件布局" label=intro:folder numbers=none}
 ├── bib
 │   └── thesis.bib
 ├── _book
@@ -131,8 +113,7 @@ $\#$ make
 ├── sjtuthesis.cfg
 ├── sjtuthesis.cls
 └── SJTUThesis-Rmd.Rproj
-
-\end{lstlisting}
+```
 
 ### 主要文件介绍
 
@@ -145,9 +126,23 @@ $\#$ make
 
 主要位于 *./rmd/* 文件夹。由于现阶段部分功能实现不全，暂且把部分内容以 latex 形式存放在 *./tex/* 文件夹下。
 
+- 中英文摘要(*./rmd/000-abstract.Rmd*)，符号表(*./rmd/001-symbol.Rmd*)等。前言(frontmatter)的其他部分，中英文封面、原创性声明、授权信息在sjtuthesis.cls中定义，不单独分离为 Rmd 文件。
+- 正文(mainmatter)，是文章的主体，位于 *./rmd/* 文件夹下，基本用 Rmarkdown 实现，部分不容易实现的，照搬 latex 原文，均在 *xxx.Rmd* 文件内。
+- 附录(*./rmd/xxx-appendix-name.Rmd*)，类似正文，使用 Rmarkdown 实现，部分内容用 latex 实现，均在 *xxx.Rmd* 文件内。
+- 致谢(*./tex/ack.tex*)、攻读学位论文期间发表的学术论文目录(*./tex/pub.tex*)、个人简历(*./tex/resume.tex*)组成附录后的部分(backmatter)。这部分能力所限，未能实现从 latex 到 Rmarkdown 的转换，仍旧保留为 latex 格式。参考文献列表由 bibtex 插入，不作为一个单独的文件。
+
 #### 配置文件
 
-主要有
+主要为 *./index.Rmd* 文件，另外两个配置文件(*./\_bookdown.yml*、*./\_output.yml*)没有特殊需求不需要更改。
 
-- _bookdown.yml
-- _output.yml
+对于 *./index.Rmd* 文件，论文题目、作者等信息直接更改为自己的即可。对第\ref{intro:options}节提到的论文选项，比如学位类型、英文模板、盲审选项、最终提交等可以放在 `classoption` 的 `[]` 内。比如 `classoption: [doctor, openright, twoside， submit]` ，就表示博士论文的提交版本。
+
+#### 图片文件夹figure {#intro:fig}
+
+figure文件夹放置了需要插入文档中的图片文件(支持PNG/JPG/PDF/EPS格式的图片)，可以在按照章节划分子目录。
+模板文件中使用`\graphicspath`命令定义了图片存储的顶层目录，在插入图片时，顶层目录名“figure”可省略。
+
+#### 参考文献数据库bib {#intro:bib}
+
+目前参考文件数据库目录只存放一个参考文件数据库 *./bib/thesis.bib*。
+关于参考文献引用，可参考第\ref{chap:example}章中的例子。

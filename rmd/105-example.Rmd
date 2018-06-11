@@ -1,5 +1,23 @@
 # 各种例子 {#chap:example}
 
+换种写法，
+
+```bash
+$\$$ make
+```
+
+```bash
+$\#$ make
+```
+
+```{.bash caption="这是有标题的，注释语句" label=code:make}
+# make
+```
+
+\begin{lstlisting}[basicstyle=\small\ttfamily, caption={编译模板}, numbers=none]
+  make
+\end{lstlisting}
+
 $$x+y=z$$
 
 from:https://github.com/rstudio/rmarkdown/issues/644
@@ -42,7 +60,7 @@ knitr::kable(
 这里是插入图片的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r logo, out.width='32.8%', fig.show='hold', fig.cap='logo', fig.align="center, echo=FALSE"}`
 
 
-```{r logo, out.width='32.8%', fig.show='hold', fig.cap='logo', fig.align="center"}
+```{r logo, out.width='32.8%', fig.show='hold', fig.cap="中文", fig.align="center"}
 knitr::include_graphics("figure/sjtulogo.pdf")
 ```
 
@@ -223,6 +241,7 @@ i,j作为虚数单位时，也应该使用“直立体”为了明显，还加�
     {English caption}
   \label{fig:SRR}
 \end{figure}
+
 
 这里还有插入EPS图像和PDF图像的例子，如图\ref{fig:epspdf:a}和图\ref{fig:epspdf:b}。这里将EPS和PDF图片作为子图插入，每个子图有自己的小标题。子图标题使用subcaption宏包添加。
 

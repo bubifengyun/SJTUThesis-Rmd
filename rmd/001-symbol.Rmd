@@ -1,4 +1,5 @@
 # 主要符号对照表
+
 \begin{longtable}{rl}
 $\epsilon$     & 介电常数 \\
  $\mu$ 		& 磁导率 \\
