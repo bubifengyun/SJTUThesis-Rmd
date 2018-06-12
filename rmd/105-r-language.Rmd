@@ -95,3 +95,251 @@ int main() {
 }
 ```
 
+```{r logo2, out.width='100%', fig.show='hold', fig.cap="这是一个表格形式的流程图", fig.align="center", echo=FALSE}
+library(shape)
+library(diagram)
+
+my_flowchart_floor_num = 6
+my_column_num = 4
+
+# 
+mycex_header = 0.6
+mycex_body = 0.7
+
+bottom_step = 1
+bottom_floor_num = 2
+bottom_height = bottom_step * bottom_floor_num
+bottom_floors = seq(length.out = bottom_floor_num + 1,
+                    from = 0,
+                    by = bottom_step)
+
+flowchart_step = 2
+flowchart_floor_num = my_flowchart_floor_num
+flowchart_height = flowchart_step * flowchart_floor_num
+flowchart_floors = seq(length.out = flowchart_floor_num - 1,
+                       from = flowchart_step,
+                       by = flowchart_step) + bottom_height
+
+top_step = 1
+top_floor_num = 4
+top_height = 4
+top_floors = c(0,1,2,3,4) * top_step + bottom_height + flowchart_height
+
+Height = top_floors[length(top_floors)]
+
+column_num = my_column_num
+column_width = 4
+Width = 1 + column_width * column_num
+
+par(mar=c(0,0,0,0))
+openplotmat(xlim=c(0,Width),ylim=c(0,Height),asp = Height/Width)
+
+x0 <- rep(0, bottom_floor_num + 1)
+x1 <- rep(Width, bottom_floor_num + 1)
+y0 <- y1 <- bottom_floors
+segments(x0,y0,x1,y1,lty = 'solid', lwd = 1)
+
+x0 <- rep(0, flowchart_floor_num + 1)
+x1 <- rep(Width, flowchart_floor_num + 1)
+y0 <- y1 <- flowchart_floors
+segments(x0,y0,x1,y1,lty = 'dashed', lwd = 0.5)
+
+x0 <- rep(0, top_floor_num + 1)
+x1 <- rep(Width, top_floor_num + 1)
+y0 <- y1 <- top_floors
+segments(x0,y0,x1,y1,lty = 'solid', lwd = 1)
+
+x0 <- x1 <- c(0, Width)
+y0 <- c(0,0)
+y1 <- c(Height, Height)
+segments(x0,y0,x1,y1,lty = 'solid', lwd = 1)
+
+x0 <- x1 <- c(2/5, 7/10) * Width
+y0 <- c(0,0)
+y1 <- c(1,1) * bottom_height
+segments(x0,y0,x1,y1,lty = 'solid', lwd = 1)
+x_bottom <- x0
+
+x0 <- x1 <- c(1, (1:(column_num -1)) * column_width + 1)
+y0 <- rep(bottom_height, column_num)
+y1 <- rep(top_floors[1], column_num)
+
+segments(x0[1],y0[1],x1[1],y1[1],lty = 'solid', lwd = 1)
+s <- 2:column_num
+segments(x0[s],y0[s],x1[s],y1[s],lty = 'dashed', lwd = 0.5)
+x_flowchart <- x0
+
+y0 <- y1
+y1 <- rep(top_floors[3], column_num)
+segments(x0,y0,x1,y1,lty = 'solid', lwd = 1)
+
+x0 <- x1 <- 2/5 * Width
+y0 <- top_floors[top_floor_num - 1]
+y1 <- Height
+segments(x0,y0,x1,y1,lty = 'solid', lwd = 1)
+x_top <- x0
+
+table_text <- function(x,y,txt,cex=mycex_header, ...){
+  textplain(mid = c(x-0.3,y+0.4), lab = txt, pos = 4, cex = cex)
+}
+
+table_text(0,0, txt = "撰写单位：某某学校")
+table_text(0,bottom_floors[2],txt = "单位名称：上海西南某高校")
+table_text(x_bottom[1],0,txt = "签发人：不告诉你们")
+table_text(x_bottom[1],bottom_floors[2],txt = "公开程度：不给你看")
+table_text(x_bottom[2],0,txt = paste("签发日期：", Sys.Date()))
+table_text(x_bottom[2],bottom_floors[2],txt = "第1页（共30页）")
+
+for(i in 1:(flowchart_floor_num - 1)) {
+  textplain(mid = c(0.5,flowchart_floors[i]+flowchart_step/2),
+            lab = as.character(flowchart_floor_num - i),
+            cex = mycex_body)
+}
+textplain(mid = c(0.5,bottom_height+flowchart_step/2),
+          lab = as.character(flowchart_floor_num),
+          cex = mycex_body)
+
+text_AZ = c("节点", LETTERS[1:column_num])
+text_str = c("责任\n主体","某某\n大学","某某\n学院","某某\n科系","某某\n实验室")
+textplain(mid = c(0.5,top_floors[1]+top_step/2),
+          lab = text_AZ[1],
+          cex = mycex_header)
+for(i in 1:column_num) {
+  textplain(mid = c(x_flowchart[i]+column_width/2,top_floors[1]+top_step/2),
+            lab = text_AZ[i+1],
+            cex = mycex_header)
+}
+
+textplain(mid = c(0.5,top_floors[2]+top_step/2),
+          lab = text_str[1],
+          cex = mycex_header)
+for(i in 1:column_num) {
+  textplain(mid = c(x_flowchart[i]+column_width/2,top_floors[2]+top_step/2),
+            lab = text_str[i+1],
+            cex = mycex_header)
+}
+
+table_text(0,top_floors[top_floor_num], txt = "部门名称：某某学院")
+table_text(0,top_floors[top_floor_num - 1],txt = "编      号：B1103492")
+table_text(x_top[1],top_floors[top_floor_num], txt = "流程名称：有点用哦")
+table_text(x_top[1],top_floors[top_floor_num - 1],txt = "概      要：胡扯")
+
+pos_cel <- function(str,row_index){
+  i <- strtoi(charToRaw(toupper(str)), 16L)
+  A_ascii <- strtoi(charToRaw('A'), 16L)
+  column_index <- i-A_ascii + 1
+  x <- x_flowchart[column_index] + column_width/2
+  if (row_index < flowchart_floor_num) {
+    y <- flowchart_floors[flowchart_floor_num - row_index] + flowchart_step/2
+  } else {
+    y <- flowchart_floors[1] - flowchart_step/2
+  }
+  return(c(x,y))
+}
+
+draw_textbox <- function(A, row_index, str, type = 'rect', width = 1) {
+  if (1 == width) {
+    dx = column_width * 0.75
+  } else {
+    dx = column_width * (width - 1)
+  }
+  
+  if (type == 'rect') {
+    textrect(mid = pos_cel(A, row_index),
+             radx = dx / 2, rady = flowchart_step / 4,
+             lab = str, cex = mycex_body,
+             box.col = "#DDDDDD",
+             shadow.size = 0)
+  } else if (type == 'round') {
+    textround(mid = pos_cel(A, row_index),
+             radx = dx / 4, rady = flowchart_step / 4,
+             lab = str, cex = mycex_body,
+             box.col = "#DDDDDD",
+             shadow.size = 0)
+  } else if (type == 'diamond') {
+    textdiamond(mid = pos_cel(A, row_index),
+             radx = dx / 2, rady = flowchart_step / 4,
+             lab = str, cex = mycex_body,
+             box.col = "#DDDDDD",
+             shadow.size = 0)
+  }
+}
+
+draw_textbox('B',1,"开始",type='round')
+draw_textbox('B',6,"结束",type='round')
+
+draw_textbox('B',2,"计划准备")
+draw_textbox('B',3,"制定计划")
+draw_textbox('B',4,"组织讨论")
+draw_textbox('C',3,"提出意见")
+draw_textbox('D',3,"提出意见")
+draw_textbox('B',5,"下发计划")
+
+draw_textbox('A',4,"审批",type='diamond')
+
+draw_linearrow <- function(pos0, pos1, str = NULL, direction = 'top_bottom') {
+  arrlength = 0.1
+  if (direction != 'top_bottom') {
+    tag = 1
+    if (direction == 'right') {
+      tag = -1
+    }
+    x0 = pos0[1] - 3/8 * column_width * tag
+    y0 = pos0[2]
+    x1 = pos1[1]
+    y1 = pos1[2] + flowchart_step/4 + arrlength
+    xm = pos0[1] - 9/20 * column_width * tag
+    ym = pos1[2] + flowchart_step / 2
+    
+    segments(x0,y0,xm,y0,lty = 'solid', lwd = 1.5)
+    segments(xm,y0,xm,ym,lty = 'solid', lwd = 1.5)
+    segments(xm,ym,x1,ym,lty = 'solid', lwd = 1.5)
+    
+    straightarrow(c(x1,ym),c(x1,y1),arr.type = "triangle",arr.length=arrlength,arr.pos = 1,lwd = 1.5)
+    table_text(xm,y0,txt = str, cex=mycex_header)
+  } else if (pos0[1] == pos1[1]) {
+    tag = 1
+    if (pos0[2] < pos1[2]) {
+      tag = -1
+    }
+    pos0[2] = pos0[2] - tag * flowchart_step/4
+    pos1[2] = pos1[2] + tag * (flowchart_step/4 + arrlength)
+    straightarrow(pos0,pos1,arr.type = "triangle", arr.length = arrlength,lwd=1.5,arr.pos = 1)
+    table_text(pos0[1] + column_width/10,pos0[2] - tag * flowchart_step/4,txt = str, cex=mycex_header)
+  } else if (pos0[2] > pos1[2]) {
+    x0 = pos0[1]
+    y0 = pos0[2] - flowchart_step/4
+    x1 = pos1[1]
+    y1 = pos1[2] + flowchart_step/4 + arrlength
+    ym = (pos0[2] + pos1[2]) / 2
+    
+    segments(x0,y0,x0,ym,lty = 'solid', lwd = 1.5)
+    segments(x0,ym,x1,ym,lty = 'solid', lwd = 1.5)
+    
+    straightarrow(c(x1,ym),c(x1,y1),arr.type = "triangle",arr.length=arrlength,arr.pos = 1,lwd = 1.5)
+    table_text(x0 + column_width/10,ym,txt = str, cex=mycex_header)
+  } else if (pos0[2] == pos1[2]) {
+    tag = 1
+    if (pos0[1] > pos1[1]) {
+      tag = -1
+    }
+    x0 = pos0[1] + 3/8 * column_width * tag
+    x1 = pos1[1] - tag * (column_width * 3/8 + arrlength)
+    y = pos0[2]
+    straightarrow(c(x0,y),c(x1,y),arr.type="triangle",arr.length=arrlength,lwd=1.5,arr.pos = 1)
+    table_text(x0+column_width/10,y,txt = str, cex=mycex_header)
+  }
+}
+
+draw_linearrow(pos_cel('B',1),pos_cel('B',2))
+draw_linearrow(pos_cel('B',2),pos_cel('B',3))
+draw_linearrow(pos_cel('B',3),pos_cel('c',3))
+draw_linearrow(pos_cel('C',3),pos_cel('D',3))
+draw_linearrow(pos_cel('D',3),pos_cel('B',4))
+draw_linearrow(pos_cel('B',5),pos_cel('B',6))
+draw_linearrow(pos_cel('A',4),pos_cel('B',5),str='是')
+
+draw_linearrow(pos_cel('A',4),pos_cel('B',3),str='否',direction = 'left')
+draw_linearrow(pos_cel('B',4),pos_cel('A',4))
+
+```

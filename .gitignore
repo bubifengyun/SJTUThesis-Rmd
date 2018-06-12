@@ -5,5 +5,4 @@
 _book/*
 _bookdown_files
 sjtu-thesis-rmd.*
-!_book/sjtu-thesis-rmd.pdf
 *.aux
