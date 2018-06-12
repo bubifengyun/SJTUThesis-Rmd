@@ -57,14 +57,11 @@ knitr::kable(
 )
 ```
 
-这里是插入图片的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r logo, out.width='32.8%', fig.show='hold', fig.cap='logo', fig.align="center, echo=FALSE"}`
+这里是插入图片的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r logo, out.width='32.8%', fig.show='hold', bicap=c('上海交通大学','SJTU'), fig.align="center, echo=FALSE"}`
 
-
-```{r logo, out.width='32.8%', fig.show='hold', fig.cap="中文", fig.align="center"}
+```{r logo, out.width='32.8%', fig.show='hold', bicap=c('上海交通大学','SJTU'), fig.align="center"}
 knitr::include_graphics("figure/sjtulogo.pdf")
 ```
-
-
 
 ```{.c .numberLines caption="一段 C 代码" label=code:c}
 #include <stdio.h>
@@ -95,7 +92,9 @@ int main() {
 }
 ```
 
-```{r logo2, out.width='100%', fig.show='hold', fig.cap="这是一个表格形式的流程图", fig.align="center", echo=FALSE}
+下面用 R 语言画一个流程图。
+
+```{r logo2, out.width='100%', fig.show='hold', bicap=c("上海交大","SJTU"), fig.align="center", echo=FALSE}
 library(shape)
 library(diagram)
 

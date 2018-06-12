@@ -8,6 +8,19 @@ if (!length(getOption('repos'))) options(repos = c(CRAN = 'https://cran.rstudio.
 lapply(c('DT', 'citr', 'formatR', 'svglite', 'webshot'), function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
+
+library(knitr)
+knit_hooks$set(plot = function(x, options) {
+  if(!is.null(options$bicap)){
+    paste("\\begin{figure}[!htp]",
+        hook_plot_tex(x, options), 
+        "\\bicaption{", options$bicap[1], "}{",options$bicap[2],"}", 
+        "\\end{figure}", sep = "")
+  }
+  else{
+    hook_plot_tex(x, options)
+  }
+})
 ```
 --- 
 title: "上海交通大学论文 Rmd bookdown 模板"
