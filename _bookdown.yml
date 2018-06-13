@@ -2,4 +2,7 @@ book_filename: sjtu-thesis-rmd
 rmd_subdir: TRUE
 clean: [bib/thesis.bib]
 delete_merged_file: TRUE
-
+language:
+  label:
+    thm: "定理 "
+    tab: "表 "

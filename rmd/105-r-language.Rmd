@@ -57,9 +57,9 @@ knitr::kable(
 )
 ```
 
-这里是插入图片的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r logo, out.width='32.8%', fig.show='hold', bicap=c('上海交通大学','SJTU'), fig.align="center, echo=FALSE"}`
+这里是插入图片的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r logo, out.width='32.8%', fig.show='hold', bicap=c('上海交通大学','SJTU'), echo=FALSE"}`
 
-```{r logo, out.width='32.8%', fig.show='hold', bicap=c('上海交通大学','SJTU'), fig.align="center"}
+```{r logo, out.width='32.8%', fig.show='hold', bicap=c('上海交通大学','SJTU')}
 knitr::include_graphics("figure/sjtulogo.pdf")
 ```
 
@@ -94,7 +94,7 @@ int main() {
 
 下面用 R 语言画一个流程图。
 
-```{r logo2, out.width='100%', fig.show='hold', bicap=c("上海交大","SJTU"), fig.align="center", echo=FALSE}
+```{r logo2, out.width='100%', fig.show='hold', bicap=c("上海交大","SJTU"), echo=FALSE}
 library(shape)
 library(diagram)
 

@@ -1,26 +1,33 @@
 ```{r setup, include=FALSE}
+
+# 为了让日期显示为英文
 locale = Sys.setlocale(category = "LC_TIME", locale = 'en_US.UTF-8')
+
 options(
   htmltools.dir.version = FALSE, formatR.indent = 2, width = 55, digits = 4
 )
+
+# 填上你需要用到的包
 if (!length(getOption('repos'))) options(repos = c(CRAN = 'https://cran.rstudio.com'))
-# 填上你需要用到的包，如 c('ggplot2', 'dplyr')
 lapply(c('DT', 'citr', 'formatR', 'svglite', 'webshot'), function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
 
+# 支持图片标题双语言，为了排版优化，强制加入 \centering
 library(knitr)
 knit_hooks$set(plot = function(x, options) {
   if(!is.null(options$bicap)){
     paste("\\begin{figure}[!htp]",
+        "\n\\centering",
         hook_plot_tex(x, options), 
-        "\\bicaption{", options$bicap[1], "}{",options$bicap[2],"}", 
-        "\\end{figure}", sep = "")
+        "\n\\bicaption{", options$bicap[1], "}{",options$bicap[2],"}", 
+        "\n\\end{figure}", sep = "")
   }
   else{
     hook_plot_tex(x, options)
   }
 })
+
 ```
 --- 
 title: "上海交通大学论文 Rmd bookdown 模板"
@@ -45,6 +52,7 @@ link-citations: yes
 colorlinks: yes
 lot: yes
 lof: yes
+href2footnote: no
 github-repo: bubifengyun/SJTUThesis-Rmd
 ---
 

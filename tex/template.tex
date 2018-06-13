@@ -7,6 +7,11 @@ $endfor$
 \providecommand{\tightlist}{%
     \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+$if(href2footnote)$% 是否把链接改为脚注
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+
 \begin{document}
 
 $if(title)$
