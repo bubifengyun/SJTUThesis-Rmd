@@ -1,5 +1,15 @@
 # R 语言的强力支持 {#chap:r-language}
 
+## 准备工作
+
+有时间，欢迎先阅读 [pandoc 手册](http://pandoc.org/MANUAL.html) 以及第\ref{chap:rmarkdown}章的内容。这里写几个简单的例子。
+
+## 关于数据的例子
+
+## 关于图片的排版
+
+## 其他例子
+
 换种写法，
 
 ```bash
@@ -14,56 +24,7 @@ $\#$ make
 # make
 ```
 
-\begin{lstlisting}[basicstyle=\small\ttfamily, caption={编译模板}, numbers=none]
-  make
-\end{lstlisting}
-
-$$x+y=z$$
-
-from:https://github.com/rstudio/rmarkdown/issues/644
-
-\begin{equation}
-f(x;\mu,\sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2 }\label{eq:equation2}
-\end{equation}
-
-$x+y=z$
-
-来自：https://stackoverflow.com/questions/27081054/r-markdown-math-equation-alignment
-
-$$
-\begin{aligned}
- AR(p): Y_i &= c + \epsilon_i + \phi_i Y_{i-1} \dots \\
- Y_{i} &= c + \phi_i Y_{i-1} \dots
-\end{aligned}
-$$
-
-来自：http://statpower.net/Content/310/R%20Stuff/SampleMarkdown.html
-
-$$\mathbf{X} = \left[\begin{array}
-{rrr}
-1 & 2 & 3 \\
-4 & 5 & 6 \\
-7 & 8 & 9
-\end{array}\right]
-$$
-
-如表 \@ref(tab:tab-single) 所示，这里是插入表格的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r table-single, tidy=FALSE, echo=FALSE}`
-
-
-```{r tab-single, tidy=FALSE}
-knitr::kable(
-  head(mtcars[, 1:8], 10), booktabs = TRUE,
-  caption = 'A table of the first 10 rows of the mtcars data.'
-)
-```
-
-这里是插入图片的示例，如不想显示代码在 option 里添加 `echo=FALSE`。比如 `{r logo, out.width='32.8%', fig.show='hold', bicap=c('上海交通大学','SJTU'), echo=FALSE"}`
-
-```{r logo, out.width='32.8%', fig.show='hold', bicap=c('上海交通大学','SJTU'), echo=FALSE}
-knitr::include_graphics("figure/sjtulogo.pdf")
-```
-
-```{.c .numberLines caption="一段 C 代码" label=code:c}
+```{.c caption="一段 C 代码" label=code:c}
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -91,6 +52,8 @@ int main() {
   return 0;
 }
 ```
+
+## 本单位曾经用过的流程图
 
 下面用 R 语言画一个流程图。
 
