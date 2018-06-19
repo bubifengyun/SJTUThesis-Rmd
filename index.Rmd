@@ -14,6 +14,7 @@ lapply(c('DT', 'citr', 'formatR', 'svglite', 'webshot'), function(pkg) {
 })
 
 # 支持图片标题双语言，为了排版优化，强制加入 \centering
+# https://github.com/yihui/knitr/issues/1554
 library(knitr)
 knit_hooks$set(plot = function(x, options) {
   if(!is.null(options$bicap)){
@@ -52,7 +53,7 @@ link-citations: yes
 colorlinks: yes
 lot: yes
 lof: yes
-href2footnote: no
+href2footnote: yes
 github-repo: bubifengyun/SJTUThesis-Rmd
 ---
 

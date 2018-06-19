@@ -1,11 +1,11 @@
 pdf:
-	Rscript --quiet _render.R "bookdown::pdf_book"
+	Rscript _render.R "bookdown::pdf_book"
 
 gitbook:
-	Rscript --quiet _render.R "bookdown::gitbook"
+	Rscript _render.R "bookdown::gitbook"
 
 all:
-	Rscript --quiet _render.R
+	Rscript _render.R
 
 wordcount:
 	@texcount _book/sjtu-thesis-rmd.tex -inc          | awk '/total/ {getline; print "词数　　:",$$4}'

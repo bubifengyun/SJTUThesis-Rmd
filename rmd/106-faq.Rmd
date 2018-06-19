@@ -1,0 +1,17 @@
+# 天黑路滑，居安思危 {#chap:faq}
+
+pandoc 的那些坑，还没有填平，只能绕着走。
+
+https://github.com/jgm/pandoc/issues/4716
+
+在行内，如果输入数学公式，最好直接用 `$` 给括起来。Markdown 的那个 `` ` `` 数学模式功能被我给关闭了，见 `./tex/template.tex`
+
+```block2
+\usepackage{listings}
+% https://github.com/jgm/pandoc/issues/4716
+% lstinline 对数学模式存在 bug，等修复后可以改为如下方式
+% \newcommand{\passthrough}[1]{#1}
+\newcommand{\passthrough}[1]{\lstset{mathescape=false}#1\lstset{mathescape=true}}
+```
+
+所以，暂时没有发现啥问题了。

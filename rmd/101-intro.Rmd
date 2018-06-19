@@ -23,7 +23,7 @@
 
 ```{.bash numbers=none}
 $\$$ sudo apt-get install r-base r-base-dev \
-rstudio texlive-full pandoc
+rstudio texlive-full pandoc make
 ```
 
 如果不能满足，请参考相关软件官网，下载最新版本。
