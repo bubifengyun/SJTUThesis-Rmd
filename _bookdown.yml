@@ -1,4 +1,4 @@
 book_filename: sjtu-thesis-rmd
 rmd_subdir: TRUE
-clean: [bib/thesis.bib]
+clean: [bib/thesis.bib, bib/packages.bib]
 delete_merged_file: TRUE

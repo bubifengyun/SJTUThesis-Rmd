@@ -39,7 +39,8 @@ $ sudo apt-get install texlive-full
 ```bash
 $ sudo apt-get install pandoc
 ```
-具体版本要求，找个时间再查。
+
+pandoc 的版本应高于 2.0.0，版本不够请自行解决。
 
 #### 运行编译成书
 

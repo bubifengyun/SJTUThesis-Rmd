@@ -13,6 +13,12 @@ lapply(c('DT', 'citr', 'formatR', 'svglite', 'webshot'), function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
 
+# 生成依赖包
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'htmlwidgets', 'webshot', 'DT',
+  'miniUI', 'tufte', 'servr', 'citr', 'rticles'
+), 'bib/packages.bib')
+
 # 支持图片标题双语言，为了排版优化，强制加入 \centering
 # https://github.com/yihui/knitr/issues/1554
 library(knitr)
@@ -47,7 +53,7 @@ englishinstitute: "Deepin OS"
 englishdate: "`r format(Sys.Date(),format='%b. %d, %Y')`"
 englishtitle: "SJTU Bookdown Template"
 englishmajor: "Comminucation and Information Tech"
-bibliography: [bib/thesis.bib]
+bibliography: [bib/thesis.bib, bib/packages.bib]
 biblio-style: apalike
 link-citations: yes
 colorlinks: yes

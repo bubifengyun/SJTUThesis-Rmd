@@ -55,7 +55,7 @@ int main() {
 
 ## 本单位曾经用过的流程图
 
-下面用 R 语言画一个流程图。
+下面用 R 语言画一个流程图。请注意双语标题。
 
 ```{r logo2, out.width='100%', fig.show='hold', bicap=c("上海交大","SJTU"), echo=FALSE}
 library(shape)
