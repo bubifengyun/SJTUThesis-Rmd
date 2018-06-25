@@ -8,7 +8,7 @@ Bookdown 编译各 `Rmd` 文件时，是按照文件名的字母排序拼接在�
 
 摘要文件需要放在除了扉页的最开头位置。由于扉页等已经在模板中处理生成，故摘要需要放在最开头，命名为 *./rmd/000-abstract.Rmd*。
 
-```{.latex caption="摘要代码框架示例" label=chapters:abstract}
+```{.block2 caption="摘要代码框架示例" label=chapters:abstract}
 \frontmatter
 \pagestyle{main}
 
@@ -37,7 +37,7 @@ An imperial edict issued in 1896 by Emperor Guangxu, established Nanyang Public 
 
 摘要后的部分章节，属于标准的 Markdown 文件，代码框架示例如代码\ref{chapters:frontword：nonhead}所示。
 
-```{.latex caption="前言后文代码框架示例" label=chapters:frontword：nonhead}
+```{.block2 caption="前言后文代码框架示例" label=chapters:frontword：nonhead}
 # 主要符号对照表
 
 \begin{longtable}{rl}
@@ -52,7 +52,7 @@ $\$$\epsilon$\$$     & 介电常数 \\
 
 ## 正文第一章
 
-```{.latex caption="正文第一章代码框架示例" label=sec:mainpage:head}
+```{.block2 caption="正文第一章代码框架示例" label=sec:mainpage:head}
 \mainmatter
 \pagestyle{main}
 
@@ -73,7 +73,7 @@ $\$$\epsilon$\$$     & 介电常数 \\
 
 全文总结比较特殊，没有编入章节序号，采用如下方式。
 
-```{.latex caption="全文总结代码框架示例" label=sec:summary}
+```{.block2 caption="全文总结代码框架示例" label=sec:summary}
 \summary
 
 这里是全文总结内容。
@@ -85,7 +85,7 @@ $\$$\epsilon$\$$     & 介电常数 \\
 
 ## 附录第一章
 
-```{.latex caption="附录代码框架示例" label=sec:appendix:head}
+```{.block2 caption="附录代码框架示例" label=sec:appendix:head}
 \appendix
 
 # bookdown 入门简介 {#bookdown-intro}

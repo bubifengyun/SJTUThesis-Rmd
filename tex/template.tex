@@ -5,7 +5,6 @@
 \usepackage{framed,color}
 \definecolor{shadecolor}{RGB}{248,248,248}
 
-
 \makeatletter
 \newenvironment{kframe}{%
 \medskip{}
@@ -70,10 +69,17 @@ $endif$
   \newtheorem*{solution}{\bfseries{解答}}
 \makeatother
 
+% 添加引言块
+\def\VA#1#2{\addvspace{12pt}\raggedleft #1\rightskip3em\par #2\rightskip3em}
+\renewenvironment{quote}
+  {\list{}{\rightmargin\leftmargin}%
+    \item\relax}
+  {\endlist}
+
+% https://tex.stackexchange.com/questions/154570/itemize-environment-within-a-tabular-environment/154577
+% 添加各类消息框
 \newenvironment{rmdblock}[1]
   {
-% https://tex.stackexchange.com/questions/154570/itemize-environment-within-a-tabular-environment/154577
-% 添加一个框
   \begin{table}[!htpb]
   \begin{tabular}{|cc|}
   \hline \quad \quad \quad &

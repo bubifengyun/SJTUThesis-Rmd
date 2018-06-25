@@ -5,3 +5,4 @@ bookdown::pdf_book:
   citation_package: biblatex
   template: tex/template.tex
   pandoc_args: ["--listings", "--top-level-division=chapter"]
+  quote_footer: ["\\VA{", "}{}"]
