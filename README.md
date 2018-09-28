@@ -12,59 +12,7 @@
 
 请先阅读[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)的软件要求，这也是本模板的要求，然后安装 Pandoc，R 和 make 即可，如果可以安装 RStudio 更好。
 
-### 一、Linux 下使用
-下面以深度操作系统15.5版本下的运行为例说明。
-
-#### 安装 R 语言和 RStudio 编译器
-
-当前深度Linux 操作系统的 R 语言的版本，还是能够编译的。请确保当前 `rstudio` 的版本高于 1.0.0。
-
-```bash
-$ sudo apt-get install r-base r-base-dev
-$ sudo apt-get install rstudio
-```
-
-如果不能满足，请参考[R官网](https://cran.r-project.org/bin/linux/debian/#debian-sid-unstable)和[RStudio官网](https://www.rstudio.com/products/rstudio/download/)。
-
-
-#### 安装 texlive 软件
-
-请确保 texlive 为2015年及之后的版本。
-
-```bash
-$ sudo apt-get install texlive-full
-```
-如果版本太低，推荐[texlive官网](http://tug.org/texlive/)下载最新的 texlive 安装，且需要创建系统链接，以便在 bash 内可用 xelatex 等。
-
-#### 安装 pandoc 软件
-
-```bash
-$ sudo apt-get install pandoc
-```
-
-pandoc 的版本应高于 2.0.0，版本不够请自行解决。
-
-#### 运行编译成书
-
-1、下载解压缩，运行
-
-```bash
-make
-```
-
-如果报错，请自行解决或联系我。
-
-2、如果您已经安装 RStudio 软件，打开 RStudio 软件，在弹出的界面，左上角点击 File->Open Project，选中 *./SJTUThesis-Rmd.Rproj* 文件打开，点击右上角靠下的一栏，有个 `Build` 格，会出现 `Build Book` 等按钮。点击 `Build Book` 就会生成 PDF 书籍了，位于 *./_book/* 文件夹下。
-
-可能需要安装一些R包，请根据问题下载。
-
-### 二、Windows 下使用
-
-略
-
-### 三、苹果系统下使用
-
-略
+详情参阅[这里](./rmd/101-intro.Rmd)
 
 ## 反馈问题
 
