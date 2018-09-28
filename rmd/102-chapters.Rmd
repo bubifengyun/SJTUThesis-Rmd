@@ -12,17 +12,17 @@ Bookdown 编译各 `Rmd` 文件时，是按照文件名的字母排序拼接在�
 \frontmatter
 \pagestyle{main}
 
-\abstract
+\begin{abstract}
 
 上海交通大学是我国历史最悠久的高等学府之一。
 
-\keywords{\large 上海交大 \quad 饮水思源 \quad 爱国荣校}
+\end{abstract}
 
-\englishabstract
+\begin{englishabstract}
 
 An imperial edict issued in 1896 by Emperor Guangxu, established Nanyang Public School in Shanghai.
 
-\englishkeywords{\large SJTU, Thesis, Rmarkdown/Bookdown template}
+\end{englishabstract}
 
 \include{tex/content}
 ```

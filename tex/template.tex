@@ -69,6 +69,10 @@ $endif$
   \newtheorem*{solution}{\bfseries{解答}}
 \makeatother
 
+% 解决双引号不一致的问题。在写完论文后，更新所有的双引号。单引号暂时没有发现问题。
+\newcommand\cqh{“}
+\newcommand\cqt{”}
+
 % 添加引言块
 \def\VA#1#2{\addvspace{12pt}\raggedleft #1\rightskip3em\par #2\rightskip3em}
 \renewenvironment{quote}
@@ -119,8 +123,6 @@ $endif$
   {\begin{rmdblock}{warning}}
   {\end{rmdblock}}
 
-\begin{document}
-
 $if(title)$
 \title{$title$}
 $endif$
@@ -147,6 +149,9 @@ $if(studentnumber)$
 $endif$
 $if(major)$
 \major{$major$}
+$endif$
+$if(keywords)$
+\keywords{$keywords$}
 $endif$
 
 $if(englishtitle)$
@@ -175,6 +180,12 @@ $endif$
 $if(englishdate)$
 \englishdate{$englishdate$}
 $endif$
+$if(englishkeywords)$
+\englishkeywords{$englishkeywords$}
+$endif$
+
+\begin{document}
+
 \maketitle
 
 \makeatletter

@@ -38,7 +38,7 @@ knit_hooks$set(plot = function(x, options) {
 ```
 --- 
 title: "上海交通大学论文 Rmd bookdown 模板"
-author: "某某"
+author: "某 \\quad 某"
 documentclass: sjtuthesis
 classoption: [doctor, openright, twoside]
 studentnumber: B1103492
@@ -47,12 +47,14 @@ advisor: "深度操作系统"
 major: "通信与信息系统"
 defenddate: "`r format(Sys.Date(),format='%Y年%m月%d日')`"
 date: "`r format(Sys.Date(),format='%Y年%m月%d日')`"
+keywords: "上海交大\\quad 饮水思源\\quad 爱国荣校"
 englishauthor: "Mou Mou"
 englishadvisor: "Deepin"
 englishinstitute: "Deepin OS"
 englishdate: "`r format(Sys.Date(),format='%b. %d, %Y')`"
 englishtitle: "SJTU Bookdown Template"
 englishmajor: "Comminucation and Information Tech"
+englishkeywords: "SJTU, XeTeX/LaTeX template, Bookdown, Rmarkdown"
 bibliography: [bib/thesis.bib, bib/packages.bib]
 biblio-style: apalike
 link-citations: yes

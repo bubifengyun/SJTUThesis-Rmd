@@ -39,6 +39,9 @@ https://github.com/yihui/knitr/issues/1554
 
 https://github.com/sjtug/SJTUThesis/issues/343
 
+## 中文双引号问题
+
+这个暂时没有好的解决方案，用如下方式。`\chh`和`\cht`分别表示汉语双引号的开头和结尾。
 
 ## 如何把 自由自在的切换数学模式和非数学模式
 

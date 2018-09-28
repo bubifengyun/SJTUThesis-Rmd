@@ -124,7 +124,7 @@ $\$$ make wordcount
 ### \LaTeX 模板文件
 
 格式控制文件控制着论文的表现形式，包括 *./sjtuthesis.cfg* 和 *./sjtuthesis.cls*。
-其中，“cls”控制论文主体格式，“cfg”为配置文件。上述文件全部来自[上海交通大学学位论文 \LaTeX 模板](https://github.com/sjtug/SJTUThesis)
+其中，\cqh cls\cqt 控制论文主体格式，\cqh cfg\cqt 为配置文件。上述文件全部来自[上海交通大学学位论文 \LaTeX 模板](https://github.com/sjtug/SJTUThesis)
 
 ### 各章源文件
 
@@ -146,7 +146,7 @@ $\$$ make wordcount
 ### 图片文件夹figure {#intro:fig}
 
 figure文件夹放置了需要插入文档中的图片文件(支持PNG/JPG/PDF/EPS格式的图片)，可以在按照章节划分子目录。
-模板文件中使用`\graphicspath`命令定义了图片存储的顶层目录，在插入图片时，顶层目录名“figure”可省略。
+模板文件中使用`\graphicspath`命令定义了图片存储的顶层目录，在插入图片时，顶层目录名\cqh figure\cqt 可省略。
 
 ### 参考文献数据库bib {#intro:bib}
 
