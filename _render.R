@@ -2,13 +2,18 @@ quiet = "--quiet" %in% commandArgs(FALSE)
 format = commandArgs(TRUE)
 travis = !is.na(Sys.getenv('CI', NA))
 
-# install bookdown
+# 配置源
 local({
   r = getOption('repos')
   if (!length(r) || all(r['CRAN'] == '@CRAN@')) r['CRAN'] = 'https://cran.rstudio.com' 
   options(repos = r)
 })
-if (system.file(package = 'bookdown') == '') install.packages('bookdown')
+
+
+# 填上你需要用到的包
+lapply(c('bookdown', 'diagram','DT', 'citr', 'formatR', 'svglite', 'webshot', 'devtools', 'shape', 'tinytex'), function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
 
 src = (function() {
   attr(body(sys.function()), 'srcfile')
