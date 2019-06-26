@@ -11,7 +11,7 @@ local({
 
 
 # 填上你需要用到的包
-lapply(c('bookdown', 'diagram','DT', 'citr', 'formatR', 'svglite', 'webshot', 'devtools', 'shape', 'tinytex'), function(pkg) {
+lapply(c('bookdown', 'diagram','DT', 'citr', 'formatR', 'svglite', 'webshot', 'devtools', 'shape'), function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
 
