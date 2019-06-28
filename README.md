@@ -1,6 +1,6 @@
 # 上海交通大学学位论文 Bookdown 模板
 
-这是为撰写上海交通大学学士、硕士或博士论文而准备的 Bookdown 模板，非官方出品。详细使用说明参见本模板内容。由于最近交大模板改动很大，根据0.10.3版本的[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)， 参考[谢益辉Bookdown中文模板](https://github.com/yihui/bookdown-chinese)改写而成。在完全兼容[原交大论文LaTeX模板](https://github.com/sjtug/SJTUThesis)的基础上，通过使用 Markdown，大幅度降低撰写论文的难度，引入 R 语言，提高论文作图、数据处理的能力，真正做到让论文能够随着数据变化而变化，而不是数据错误了，要逐个手动改变。对于无法使用 Rmarkdown 实现的内容，完全复制粘贴 LaTeX 代码也能够运行，可能会多一些括号之类的，请删除。
+这是为撰写上海交通大学学士、硕士或博士论文而准备的 Bookdown 模板，非官方出品。详细使用说明参见本模板内容。根据最新的[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)， 参考[谢益辉Bookdown中文模板](https://github.com/yihui/bookdown-chinese)，非常感谢@AlexaraWu的支持，改写而成。在完全兼容[原交大论文LaTeX模板](https://github.com/sjtug/SJTUThesis)的基础上，通过使用 Markdown，大幅度降低撰写论文的难度，引入 R 语言，提高论文作图、数据处理的能力，真正做到让论文能够随着数据变化而变化，而不是数据错误了，要逐个手动改变。对于无法使用 Rmarkdown 实现的内容，完全复制粘贴 LaTeX 代码也能够运行，可能会多一些括号之类的，请删除。
 
 **本模板会保持sjtuthesis.cls和sjtuthesis.cfg两个文件跟原论文模板一致。**
 
@@ -39,6 +39,7 @@ SJTUThesis-Rmd 是一个刚刚启动的开源项目，我们非常欢迎新的�
 * 感谢 William Wang 同学对模板移植做出的巨大贡献
 * 感谢 [@weijianwen](https://github.com/weijianwen) 学长一直以来的开发和维护工作
 * 感谢 [@sjtug](https://github.com/sjtug) 以及 [@dyweb](https://github.com/dyweb) 对 0.9.5 之后版本的开发和维护工作
+* 感谢[@AlexaraWu](https://github.com/AlexaraWu)提供了非常大的帮助。
 * 感谢所有为模板贡献过代码的[同学们](https://github.com/sjtug/SJTUThesis/graphs/contributors)，以及所有测试和使用模板的各位同学
 
 ## 软件许可证

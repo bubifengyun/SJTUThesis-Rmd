@@ -9,9 +9,14 @@ local({
   options(repos = r)
 })
 
-
 # 填上你需要用到的包
-lapply(c('bookdown', 'diagram','DT', 'citr', 'formatR', 'svglite', 'webshot', 'devtools', 'shape'), function(pkg) {
+
+if (system.file(package = 'rmarkdown') == '')
+  remotes::install_github('rstudio/rmarkdown')
+if (system.file(package = 'bookdown') == '')
+  install.packages('bookdown')
+
+lapply(c('diagram','DT', 'citr', 'formatR', 'svglite', 'webshot', 'devtools', 'shape'), function(pkg) {
   if (system.file(package = pkg) == '') install.packages(pkg)
 })
 

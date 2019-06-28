@@ -6,3 +6,4 @@ bookdown::pdf_book:
   template: tex/template.tex
   pandoc_args: ["--listings", "--top-level-division=chapter"]
   quote_footer: ["\\VA{", "}{}"]
+  md_extensions: -smart
