@@ -10,7 +10,6 @@ Bookdown 编译各 `Rmd` 文件时，是按照文件名的字母排序拼接在�
 
 ```{.block2 caption="摘要代码框架示例" label=chapters:abstract}
 \frontmatter
-\pagestyle{main}
 
 \begin{abstract}
 
@@ -54,7 +53,6 @@ $\$$\epsilon$\$$     & 介电常数 \\
 
 ```{.block2 caption="正文第一章代码框架示例" label=sec:mainpage:head}
 \mainmatter
-\pagestyle{main}
 
 # 这是什么 {#chap:intro}
 

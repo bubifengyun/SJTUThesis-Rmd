@@ -1,5 +1,4 @@
 \mainmatter
-\pagestyle{main}
 
 # 这是什么 {#chap:intro}
 
