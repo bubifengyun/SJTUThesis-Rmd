@@ -14,7 +14,7 @@
 - pandoc
 - Tex
 
-需要安装这些软件，才可以使用。
+需要安装这些软件，才可以使用。现在准备工作还需要太多的内容，不太容易成功，后续做个虚拟机。
 
 ### Linux 下使用
 
@@ -40,6 +40,8 @@ $\$$ make
 ```
 
 ### Windows 下使用
+
+有[大神](https://github.com/bubifengyun/SJTUThesis-Rmd/issues/6)在Windows10下完成了编译，待有时间再完善如何编译。
 
 略
 
