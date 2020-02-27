@@ -1,33 +1,12 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 
-\usepackage{framed,color}
-\definecolor{shadecolor}{RGB}{248,248,248}
+% 所有其它可能用到的包都统一放到这里了，可以根据自己的实际添加或者删除。
+\usepackage{sjtuthesis}
 
-\makeatletter
-\newenvironment{kframe}{%
-\medskip{}
-\setlength{\fboxsep}{.8em}
- \def\at@end@of@kframe{}%
- \ifinner\ifhmode%
-  \def\at@end@of@kframe{\end{minipage}}%
-  \begin{minipage}{\columnwidth}%
- \fi\fi%
- \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
- \colorbox{shadecolor}{##1}\hskip-\fboxsep
-     % There is no \\@totalrightmargin, so:
-     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
- \MakeFramed {\advance\hsize-\width
-   \@totalleftmargin\z@ \linewidth\hsize
-   \@setminipage}}%
- {\par\unskip\endMakeFramed%
- \at@end@of@kframe}
-\makeatother
-\newenvironment{Shaded}{\begin{kframe}}{\end{kframe}}
+% 定义图片文件目录与扩展名
+\graphicspath{{figure/}}
+\DeclareGraphicsExtensions{.pdf,.eps,.png,.jpg,.jpeg}
 
-\makeatletter
-\@ifundefined{Shaded}{
-}{\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}}
-\makeatother
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
@@ -40,180 +19,43 @@ $if(href2footnote)$% 是否把链接改为脚注
 \renewcommand{\href}[2]{#2\footnote{\url{#1}}}
 $endif$
 
-\usepackage{bm}
-
-\usepackage{upgreek}
-\usepackage{wasysym}
-
-% 表格中支持跨行
-\usepackage{multirow}
-
-\usepackage{dcolumn}
-% A new column type
-\newcolumntype{d}[1]{D{.}{.}{#1}}% or D{.}{,}{#1} or D{.}{\cdot}{#1}
-
-\usepackage{threeparttable}
-
-\usepackage{siunitx}
-
-\usepackage{hologo}
-\newcommand{\XeTeX}{\hologo{XeTeX}}
-\newcommand{\BibTeX}{\hologo{BibTeX}}
-\newcommand{\CJKLaTeX}{CJK--\LaTeX}
-
-\usepackage{tikz}
-
-\usepackage{algorithm}
-
 \makeatletter
-
-\ifsjtu@english
-  \def\sjtu@label@algorequire{Input:}
-  \def\sjtu@label@algoensure{Output:}
-\else
-  \def\sjtu@label@algorequire{输入:}
-  \def\sjtu@label@algoensure{输出:}
-\fi
-\renewcommand{\algorithmicrequire}{\textbf{\sjtu@label@algorequire}}
-\renewcommand{\algorithmicensure}{\textbf{\sjtu@label@algoensure}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The following definitions add Switch statement to LaTeX algorithmicx package
-% It's based on Werner's answer on stackoverflow
-% http://tex.stackexchange.com/questions/53357/switch-cases-in-algorithmic
-
-% New definitions
-\algnewcommand\algorithmicswitch{\textbf{switch}}
-\algnewcommand\algorithmiccase{\textbf{case}}
-\algnewcommand\algorithmicdefault{\textbf{default}}
-
-% New "environments"
-% using \algtext*{<env>} removes any typesetting of that command
-\algdef{SE}[SWITCH]{Switch}{EndSwitch}[1]{\algorithmicswitch\ (#1)}{\algorithmicend\ \algorithmicswitch}%
-%\algtext*{EndSwitch}%
-\algdef{SE}[CASE]{Case}{EndCase}[1]{\algorithmiccase\ #1:}{\algorithmicend\ \algorithmiccase}%
-\algtext*{EndCase}%
-\algdef{SE}[DEFAULT]{Default}{EndDefault}{\algorithmicdefault\ :}{\algorithmicend\ \algorithmicdefault}%
-\algtext*{EndDefault}%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The following add some extra commands to LaTeX algorithmicx package
-
-% Assert
-\algnewcommand\algorithmicassert{\texttt{assert}}
-\algnewcommand\Assert[1]{\State \algorithmicassert(#1)}%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% Setting Package listings/lstlistings
+\lstset{tabsize=4, %
+    aboveskip=\medskipamount,
+    belowskip=\medskipamount,
+    basicstyle=\footnotesize\ttfamily,
+    commentstyle=\slshape\color{black!60},
+    stringstyle=\color{green!40!black!100},
+    keywordstyle=\bfseries\color{blue!50!black},
+    extendedchars=false,
+    upquote=true,
+    tabsize=2,
+    showstringspaces=false,
+    xleftmargin=1em,
+    xrightmargin=1em,
+    breaklines=true,
+    breakindent=2em,
+    framexleftmargin=1em,
+    framexrightmargin=1em,
+    backgroundcolor=\color{gray!10},
+    columns=flexible,
+    keepspaces=true,
+    texcl=true,
+    mathescape=true
+}
 \makeatother
 
 % 自定义命令
 
-% E-mail
-\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
 
-% upper math letter
-\newcommand{\me}{\mathrm{e}}
-\newcommand{\mi}{\mathrm{i}}
-\newcommand{\mj}{\mathrm{j}}
-\newcommand{\dif}{\mathrm{d}}
 
-% Graphic path & file extension
-\graphicspath{{fig/}{figure/}{figures/}{logo/}{logos/}{graph/}{graphs}}
-\DeclareGraphicsExtensions{.pdf,.eps,.png,.jpg,.jpeg}
-
-\usepackage{listings}
-\lstset{style=lstStyleCode}
-\makeatletter
-\ifsjtu@english
-  \def\sjtu@label@listingname{Code}
-\else
-  \def\sjtu@label@listingname{代码}
-\fi
-\renewcommand{\lstlistingname}{\sjtu@label@listingname}
-\makeatother
-\AtBeginDocument{%
-  \renewcommand{\thelstlisting}{\thechapter--\arabic{lstlisting}}
-}
 % https://github.com/jgm/pandoc/issues/4716
 % lstinline 对数学模式存在 bug，等修复后可以改为如下方式
 % \newcommand{\passthrough}[1]{#1}
 \newcommand{\passthrough}[1]{\lstset{mathescape=false}#1\lstset{mathescape=true}} 
 
-
-% 感谢 AlexaraWu 的指导 https://github.com/sjtug/SJTUThesis/issues/343
-% 兼容 Bookdown 定理等框架
-% 重新定义定理环境
-\usepackage{amsthm}
-\makeatletter
-\ifsjtu@english
-  \def\sjtu@label@thm{Theorem}
-  \def\sjtu@label@lem{Lemma}
-  \def\sjtu@label@prop{Proposition}
-  \def\sjtu@label@cor{Corollary}
-  \def\sjtu@label@defn{Definition}
-  \def\sjtu@label@conj{Conjecture}
-  \def\sjtu@label@exmp{Example}
-  \def\sjtu@label@rem{Remark}
-  \def\sjtu@label@case{Case}
-  \def\sjtu@label@proof{Proof}
-\else
-  \def\sjtu@label@algo{算法}
-  \def\sjtu@label@thm{定理}
-  \def\sjtu@label@lem{引理}
-  \def\sjtu@label@prop{命题}
-  \def\sjtu@label@cor{推论}
-  \def\sjtu@label@defn{定义}
-  \def\sjtu@label@conj{猜想}
-  \def\sjtu@label@exmp{例}
-  \def\sjtu@label@rem{注}
-  \def\sjtu@label@case{情形}
-  \def\sjtu@label@proof{证明}
-\fi
-\newtheoremstyle{break}% name
-  {}%      Space above, empty = `usual value'
-  {}%      Space below
-  {\itshape}% Body font
-  {}%         Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}% Thm head font
-  {.}%        Punctuation after thm head
-  {\newline}% Space after thm head: \newline = linebreak
-  {}%         Thm head spec
-\theoremstyle{plain}
-  \newtheorem{algo}{\sjtu@label@algo~}[chapter]
-  \newtheorem{thm}{\sjtu@label@thm~}[chapter]
-  \newtheorem{lem}[thm]{\sjtu@label@lem~}
-  \newtheorem{prop}[thm]{\sjtu@label@prop~}
-  \newtheorem{cor}[thm]{\sjtu@label@cor~}
-  \newtheorem{theorem}{\sjtu@label@thm~}[chapter]
-  \newtheorem{lemma}[theorem]{\sjtu@label@lem~}
-  \newtheorem{proposition}[theorem]{\sjtu@label@prop~}
-  \newtheorem{corollary}[theorem]{\sjtu@label@cor~}
-\theoremstyle{definition}
-  \newtheorem{defn}{\sjtu@label@defn~}[chapter]
-  \newtheorem{conj}{\sjtu@label@conj~}[chapter]
-  \newtheorem{exmp}{\sjtu@label@exmp~}[chapter]
-  \newtheorem{rem}{\sjtu@label@rem~}
-  \newtheorem{case}{\sjtu@label@case~}
-  \newtheorem{definition}{\sjtu@label@defn~}[chapter]
-  \newtheorem{exercise}{练习}[chapter]
-  \newtheorem{conjecture}{\sjtu@label@conj~}[chapter]
-  \newtheorem{example}{\sjtu@label@exmp~}[chapter]
-\theoremstyle{break}
-  \newtheorem{bthm}[thm]{\sjtu@label@thm~}
-  \newtheorem{blem}[thm]{\sjtu@label@lem~}
-  \newtheorem{bprop}[thm]{\sjtu@label@prop~}
-  \newtheorem{bcor}[thm]{\sjtu@label@cor~}
-\theoremstyle{remark}
-  \newtheorem{remark}{\sjtu@label@rem~}
-  \newtheorem*{solution}{\bfseries{解答}}
-\renewcommand{\proofname}{\bf\sjtu@label@proof}
-\makeatother
-
-% 设置西文字体
-\usepackage[defaultsups]{newtxtext}
-\usepackage[upint]{newtxmath}
-\usepackage[opentype]{sourcecodepro}
+\lstset{mathescape=false}
 
 % 解决双引号不一致的问题。在写完论文后，更新所有的双引号。单引号暂时没有发现问题。
 \newcommand\cqh{“}
@@ -225,49 +67,6 @@ $endif$
   {\list{}{\rightmargin\leftmargin}%
     \item\relax}
   {\endlist}
-
-% https://tex.stackexchange.com/questions/154570/itemize-environment-within-a-tabular-environment/154577
-% 添加各类消息框
-\newenvironment{rmdblock}[1]
-  {
-  \begin{table}[!htpb]
-  \begin{tabular}{|cc|}
-  \hline \quad \quad \quad &
-  \begin{minipage}{.88\textwidth}
-  \begin{itemize}
-  \renewcommand{\labelitemi}{
-    \raisebox{-.7\height}[0pt][0pt]{
-      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{figure/bookdown/#1}}
-    }
-  }
-  \setlength{\fboxsep}{1em}
-  \begin{kframe}
-  \item
-  }
-  {
-  \end{kframe}
-  \end{itemize}
-  \end{minipage}
-  \\
-  \hline
-  \end{tabular}
-  \end{table}
-  }
-\newenvironment{rmdnote}
-  {\begin{rmdblock}{note}}
-  {\end{rmdblock}}
-\newenvironment{rmdcaution}
-  {\begin{rmdblock}{caution}}
-  {\end{rmdblock}}
-\newenvironment{rmdimportant}
-  {\begin{rmdblock}{important}}
-  {\end{rmdblock}}
-\newenvironment{rmdtip}
-  {\begin{rmdblock}{tip}}
-  {\end{rmdblock}}
-\newenvironment{rmdwarning}
-  {\begin{rmdblock}{warning}}
-  {\end{rmdblock}}
 
 $if(title)$
 \title{$title$}
@@ -310,9 +109,7 @@ $if(encosupervisor)$
 \encosupervisor{Prof. \textsc{$encosupervisor$}}
 $endif$
 $if(endepartment)$
-\endepartment{\textsc{$endepartment$} \\
-  \textsc{Shanghai Jiao Tong University} \\
-  \textsc{Shanghai, P.R.China}}
+\endepartment{\textsc{$endepartment$}
 $endif$
 $if(enmajor)$
 \enmajor{$enmajor$}
@@ -333,24 +130,25 @@ $endif$
 
 $body$
 
-\backmatter	% 文后无编号部分 
+% 文后无编号部分
+\backmatter
 
-%% 参考资料
+% 参考资料
 \printbibliography[heading=bibintoc]
 
-%% 致谢、发表论文、申请专利、参与项目、简历
-%% 用于盲审的论文需隐去致谢、发表论文、申请专利、参与的项目
+% 用于盲审的论文需隐去致谢、发表论文、参与项目、申请专利、简历
 
 % 致谢
-\include{tex/ack}
+\input{tex/acknowledgements}
+
+% 发表论文、参与项目、申请专利、简历
+% 盲审论文中，发表学术论文及参与科研情况等仅以第几作者注明即可，不要出现作者或他人姓名
+\input{tex/publications}
+\input{tex/projects}
+\input{tex/patents}
+\input{tex/resume}
 
 % 中文学士学位论文要求在最后有一个英文大摘要，单独编页码，英文学士学位论文不需要
-\include{tex/end_english_abstract}
-
-% 盲审论文中，发表学术论文及参与科研情况等仅以第几作者注明即可，不要出现作者或他人姓名
-\include{tex/pub}       % 发表论文
-\include{tex/projects}  % 参与的项目
-% \include{tex/patents}   % 申请专利
-% \include{tex/resume}    % 个人简历
+\input{tex/end_english_abstract}
 
 \end{document}

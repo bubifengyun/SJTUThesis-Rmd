@@ -1,8 +1,8 @@
-\input{tex/floats}
+% !TeX root = ../thesis.tex
 
-# 浮动体
+\chapter{浮动体}
 
-## 插图
+\section{插图}
 
 插图功能是利用 \TeX\ 的特定编译程序提供的机制实现的，不同的编译程序支持不同的图
 形方式。有的同学可能听说“\LaTeX\ 只支持 EPS”，事实上这种说法是不准确的。\XeTeX
@@ -12,7 +12,7 @@
 件中的位置对应，这也是刚使用 \LaTeX\ 同学可能遇到的问题。如果要强制固定浮动图形
 的位置，请使用 \pkg{float} 宏包，它提供了 \texttt{[H]} 参数。
 
-### 单个图形
+\subsection{单个图形}
 
 图要有图题，研究生图题采用中英文对照，并置于图的编号之后，图的编号和图题应置于图
 下方的居中位置。引用图应在图题右上角标出文献来源。当插图中组成部件由数字或字母等
@@ -128,9 +128,9 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 culpa qui officia deserunt mollit anim id est laborum.
 
-## 表格
+\section{表格}
 
-### 基本表格
+\subsection{基本表格}
 
 编排表格应简单明了，表达一致，明晰易懂，表文呼应、内容一致。表题置于表上，研究生
 学位论文可以用中、英文两种文字居中排写，中文在上，也可以只用中文。
@@ -160,7 +160,7 @@ culpa qui officia deserunt mollit anim id est laborum.
   一个在表格中使用脚注的例子，请留意与 \pkg{threeparttable} 实现的效果有何不
   同。}
 
-### 复杂表格
+\subsection{复杂表格}
 
 我们经常会在表格下方标注数据来源，或者对表格里面的条目进行解释。可以用
 \pkg{threeparttable} 实现带有脚注的表格，如表~\ref{tab:footnote}。
@@ -257,7 +257,7 @@ culpa qui officia deserunt mollit anim id est laborum.
   \bottomrule
 \end{longtable}
 
-## 算法环境
+\section{算法环境}
 
 算法环境可以使用 \pkg{algorithms} 宏包或者较新的 \pkg{algorithm2e} 实现。
 算法~\ref{algo:algorithm} 是一个使用 \pkg{algorithm2e} 的例子。关于排版算法环境
@@ -283,12 +283,12 @@ culpa qui officia deserunt mollit anim id est laborum.
   }
 \end{algorithm}
 
-## 代码环境
+\section{代码环境}
 
 我们可以在论文中插入算法，但是不建议插入大段的代码。如果确实需要插入代码，建议使
 用 \pkg{listings} 宏包。
 
-```c
+\begin{codeblock}[language=C]
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -315,4 +315,4 @@ int main() {
 
   return 0;
 }
-```
+\end{codeblock}

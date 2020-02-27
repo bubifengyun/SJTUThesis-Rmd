@@ -25,7 +25,7 @@
 \ProvidesClass{sjtuthesis}
   [2019/06/16 1.0.0rc Shanghai Jiao Tong University Thesis Template]
 \hyphenation{SJTU-Thesis}
-\def\sjtuthesis{SJTUThesis}
+\def\sjtuthesis{SJTU\textsc{Thesis}}
 \def\version{1.0.0rc}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
@@ -34,45 +34,66 @@
   setkeys=\kvsetkeys}
 \DeclareStringOption[doctor]{degree}[doctor]
 \DeclareStringOption[chinese]{language}[chinese]
-\DeclareStringOption[gb7714-2015]{bibstyle}[gb7714-2015]
 \DeclareStringOption[5]{zihao}[5]
+\DeclareStringOption[all]{setlatinfont}[all]
+\DeclareStringOption[GB]{mathstyle}[GB]
+\DeclareStringOption[gb7714-2015]{bibstyle}[gb7714-2015]
 \DeclareBoolOption{review}
-\DeclareBoolOption{unsetfont}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessKeyvalOptions*
 \newcommand{\sjtu@validate@key}[1]{%
-  \@ifundefined{sjtu@\csname sjtu@#1\endcsname true}{%
+  \@ifundefined{sjtu@#1@\csname sjtu@#1\endcsname true}{%
     \ClassError{sjtuthesis}{Invalid value '\csname sjtu@#1\endcsname'}{}%
   }{%
-    \csname sjtu@\csname sjtu@#1\endcsname true\endcsname
+    \csname sjtu@#1@\csname sjtu@#1\endcsname true\endcsname
   }%
 }
-\newif\ifsjtu@course
-\newif\ifsjtu@bachelor
-\newif\ifsjtu@master
-\newif\ifsjtu@doctor
+\newif\ifsjtu@degree@course
+\newif\ifsjtu@degree@bachelor
+\newif\ifsjtu@degree@master
+\newif\ifsjtu@degree@doctor
 \sjtu@validate@key{degree}
-\ifsjtu@course\sjtu@bachelortrue\fi
-\ifsjtu@doctor\sjtu@mastertrue\fi
-\newif\ifsjtu@chinese
-\newif\ifsjtu@english
+\ifsjtu@degree@course\sjtu@degree@bachelortrue\fi
+\ifsjtu@degree@doctor\sjtu@degree@mastertrue\fi
+\newif\ifsjtu@language@chinese
+\newif\ifsjtu@language@english
 \sjtu@validate@key{language}
-\ifsjtu@english
+\newif\ifsjtu@setlatinfont@none
+\newif\ifsjtu@setlatinfont@main
+\newif\ifsjtu@setlatinfont@math
+\newif\ifsjtu@setlatinfont@all
+\sjtu@validate@key{setlatinfont}
+\ifsjtu@setlatinfont@all
+  \sjtu@setlatinfont@maintrue
+  \sjtu@setlatinfont@mathtrue
+\fi
+\newif\ifsjtu@mathstyle@GB
+\@ifundefined{sjtu@mathstyle@\csname sjtu@mathstyle\endcsname true}{}{%
+  \sjtu@mathstyle@GBtrue
+  \def\sjtu@mathstyle{ISO}
+}
+\ifsjtu@language@english
   \PassOptionsToClass{scheme=plain}{ctexbook}
 \fi
 \PassOptionsToPackage{no-math}{fontspec}
+\PassOptionsToPackage{math-style=\sjtu@mathstyle}{unicode-math}
 \LoadClass[a4paper,zihao=\sjtu@zihao,linespread=1.3,UTF8]{ctexbook}
+\ifsjtu@degree@bachelor
+  \AtEndOfClass{\input{sjtuthesis-bachelor.ltx}}
+\else
+  \ifsjtu@degree@master
+    \AtEndOfClass{\input{sjtuthesis-graduate.ltx}}
+  \fi
+\fi
 \RequirePackage{etoolbox}
 \RequirePackage{xparse}
 \RequirePackage{environ}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
 \RequirePackage{pageslts}
-\RequirePackage{mathtools}
-\ifsjtu@unsetfont\relax\else%
-  \RequirePackage[defaultsups]{newtxtext}
-  \RequirePackage[upint]{newtxmath}
-  \RequirePackage[opentype]{sourcecodepro}
+\RequirePackage{amsmath}
+\ifsjtu@setlatinfont@math
+  \RequirePackage{unicode-math}
 \fi
 \RequirePackage{anyfontsize}
 \RequirePackage{xcolor}
@@ -148,7 +169,7 @@
 \sjtu@def@label{abstractEng}{Abstract}
 \sjtu@def@label{keywordsChi}{关键词：}
 \sjtu@def@label{keywordsEng}{Key words:~}
-\ifsjtu@english
+\ifsjtu@language@english
   \sjtu@def@label{titlepage}{Title Page}
   \def\sjtu@label@originality{\sjtu@label@originalityEng}
   \def\sjtu@label@authorization{\sjtu@label@authorizationEng}
@@ -195,6 +216,60 @@
   contentsname   = \sjtu@label@contents,
   listfigurename = \sjtu@label@listfigure,
   listtablename  = \sjtu@label@listtable}
+\newif\ifsjtu@xitsnew
+\@ifpackagelater{fontspec}{2017/01/20}{
+  \IfFontExistsTF{XITSMath-Regular.otf}{
+    \sjtu@xitsnewtrue
+  }{}
+}{}
+\ifsjtu@setlatinfont@main
+  \ifsjtu@xitsnew
+    \setmainfont{XITS}[
+      Extension          = .otf,
+      UprightFont        = *-Regular,
+      BoldFont           = *-Bold,
+      ItalicFont         = *-Italic,
+      BoldItalicFont     = *-BoldItalic,
+      UprightFeatures    = { SmallCapsFont = texgyretermes-regular },
+      BoldFeatures       = { SmallCapsFont = texgyretermes-bold },
+      ItalicFeatures     = { SmallCapsFont = texgyretermes-italic },
+      BoldItalicFeatures = { SmallCapsFont = texgyretermes-bolditalic },
+      SmallCapsFeatures  = { Letters = SmallCaps }
+    ]
+  \else
+    \setmainfont{xits}[
+      Extension          = .otf,
+      UprightFont        = *-regular,
+      BoldFont           = *-bold,
+      ItalicFont         = *-italic,
+      BoldItalicFont     = *-bolditalic,
+      UprightFeatures    = { SmallCapsFont = texgyretermes-regular },
+      BoldFeatures       = { SmallCapsFont = texgyretermes-bold },
+      ItalicFeatures     = { SmallCapsFont = texgyretermes-italic },
+      BoldItalicFeatures = { SmallCapsFont = texgyretermes-bolditalic },
+      SmallCapsFeatures  = { Letters = SmallCaps }
+    ]
+  \fi
+  \RequirePackage[opentype,scaled=.9]{sourcesanspro}
+  \RequirePackage[opentype,scaled=.9]{sourcecodepro}
+\fi
+\ifsjtu@setlatinfont@math
+  \ifsjtu@xitsnew
+    \setmathfont{XITSMath-Regular}[
+      Extension    = .otf,
+      BoldFont     = XITSMath-Bold,
+      StylisticSet = 8
+    ]
+    \setmathfont{XITSMath-Regular.otf}[range={cal,bfcal},StylisticSet=1]
+    \else
+    \setmathfont{xits-math}[
+      Extension    = .otf,
+      BoldFont     = *bold,
+      StylisticSet = 8
+    ]
+    \setmathfont{xits-math.otf}[range={cal,bfcal},StylisticSet=1]
+  \fi
+\fi
 \patchcmd\cleardoublepage%
   {\newpage}{\thispagestyle{empty}\newpage}
   {}{}
@@ -235,6 +310,7 @@
   punct          = quanjiao,
   space          = auto,
   autoindent     = true}
+\AtEndOfClass{\sloppy}
 \setlist{nosep}
 \setlist*{leftmargin=*}
 \setlist[1]{labelindent=\parindent}
@@ -281,14 +357,37 @@
   \renewcommand{\p@subfigure}{\thefigure}
   \renewcommand{\thetable}{\thechapter--\arabic{table}}
 }
+\newif\ifsjtu@setfloatfont
+\renewcommand{\@floatboxreset}{%
+  \reset@font
+  \ifsjtu@setfloatfont
+    \zihao{5}
+  \else
+    \normalsize
+  \fi
+  \@setminipage
+}
+\BeforeBeginEnvironment{longtable}
+  {\begingroup\ifsjtu@setfloatfont\zihao{5}\fi}
+\AfterEndEnvironment{longtable}
+  {\endgroup}
+\NewDocumentCommand{\sjtuSetFloatFontOn}{}{\sjtu@setfloatfonttrue}
+\NewDocumentCommand{\sjtuSetFloatFontOff}{}{\sjtu@setfloatfontfalse}
 \DeclareCaptionFont{sjtucaptionfont}{\zihao{5}\kaishu}
-\DeclareCaptionFont{sjtusubcaptionfont}{\zihao{-5}\normalfont}
+\DeclareCaptionFont{sjtusubcaptionfont}{\zihao{5}\normalfont}
 \captionsetup{%
   format        = plain,
   labelformat   = simple,
   labelsep      = space,
   justification = centering,
-  font          = sjtucaptionfont}
+  font          = sjtucaptionfont
+}
+\captionsetup[sub]{%
+  format        = hang,
+  labelformat   = brace,
+  justification = justified,
+  font          = sjtusubcaptionfont
+}
 \DeclareCaptionOption{bi-first}[]{%
   \def\tablename{\sjtu@label@table}
   \def\figurename{\sjtu@label@figure}}
@@ -297,8 +396,20 @@
   \def\figurename{Figure}}
 \captionsetup[bi-first]{bi-first}
 \captionsetup[bi-second]{bi-second}
-\captionsetup[sub]{font=sjtusubcaptionfont}
-\newcommand{\sjtu@square}{{\CJKfamily+{zhsong}\symbol{"25A1}}}
+\ifsjtu@mathstyle@GB
+  \let\mathellipsis\cdots
+  \AtBeginDocument{%
+    \renewcommand{\Re}{\operatorname{Re}}%
+    \renewcommand{\Im}{\operatorname{Im}}%
+  }
+\fi
+\newcommand\upe{\mathrm{e}}
+\newcommand\upi{\mathrm{i}}
+\newcommand\upj{\mathrm{j}}
+\newcommand\dif{\mathop{}\!\mathrm{d}}
+\newcommand{\sjtu@square}{%
+  \begingroup\CJKfamily+{zhsong}\symbol{"25A1}\endgroup
+}
 \newcommand{\sjtu@authconf}{%
   \par\hspace{7em}%
   {\heiti 保\quad 密}~\sjtu@square，在 \uline{\hspace{3em}}
@@ -317,119 +428,176 @@
   }
 }
 \NewDocumentCommand{\makeDeclareOriginality}{o}{%
-  \ifsjtu@review\relax\else%
+  \ifsjtu@review\relax\else
     \cleardoublepage
     \pdfbookmark[0]{\sjtu@label@originality}{origtitle}
     \IfNoValueTF{#1}{%
       \thispagestyle{empty}
       \chapter*{\zihao{-2}\sjtu@label@schoolChi \\%
                 \sjtu@label@origtitle}
-      {\zihao{4}
+      \begingroup
+        \zihao{4}
         \sjtu@label@origbody
-        \vskip16ex
+        \vskip 16ex
         \noindent
         \begin{minipage}{\textwidth}
           \hfill
           \sjtu@signbox{\sjtu@label@thesiscat 作者}
-        \end{minipage}}}
-      {\includepdf[pagecommand={\thispagestyle{empty}}]{#1}}
+        \end{minipage}
+      \endgroup
+    }
+    {\includepdf[pagecommand={\thispagestyle{empty}}]{#1}}
+    \cleardoublepage
   \fi
 }
 \NewDocumentCommand{\makeDeclareAuthorization}{o}{%
-  \ifsjtu@review\relax\else%
+  \ifsjtu@review\relax\else
     \cleardoublepage
     \pdfbookmark[0]{\sjtu@label@authorization}{authtitle}
     \IfNoValueTF{#1}{%
       \thispagestyle{empty}
       \chapter*{\zihao{-2}\sjtu@label@schoolChi \\%
                 \sjtu@label@authtitle}
-      {\zihao{4}
+      \begingroup
+        \zihao{4}
         \sjtu@label@authbody
-        \vskip1ex
+        \vskip 1ex
         \sjtu@authconf
-        \vskip16ex
+        \vskip 16ex
         \noindent
         \begin{minipage}{\textwidth}
           \sjtu@signbox{\sjtu@label@thesiscat 作者}
           \hfill
           \sjtu@signbox{指导教师}
-        \end{minipage}}}
-      {\includepdf[pagecommand={\thispagestyle{empty}}]{#1}}
+        \end{minipage}
+      \endgroup
+    }
+    {\includepdf[pagecommand={\thispagestyle{empty}}]{#1}}
+    \cleardoublepage
   \fi
 }
-\NewDocumentEnvironment{nomenclature}{m}
-{\cleardoublepage
+\NewDocumentEnvironment{nomenclature}{m}{%
+  \cleardoublepage
   \pdfbookmark[0]{\sjtu@label@nomenclature}{nomenclature}
   \chapter*{\sjtu@label@nomenclature}
-  \markboth{\sjtu@label@nomenclature}%
-           {\sjtu@label@nomenclature}
-  \begin{longtable}{#1}}
-{\end{longtable}}
+  \@mkboth{\sjtu@label@nomenclature}%
+          {\sjtu@label@nomenclature}%
+  \begin{longtable}{#1}
+}{\end{longtable}}
 \NewDocumentEnvironment{summary}{}{%
   \cleardoublepage
   \chapter*{\sjtu@label@summary}
-  \markboth{\sjtu@label@summary}%
-           {\sjtu@label@summary}
-  \addcontentsline{toc}{chapter}{\sjtu@label@summary}
+  \@mkboth{\sjtu@label@summary}%
+          {\sjtu@label@summary}%
+  \addcontentsline{toc}{chapter}{\sjtu@label@summary}%
 }{}
 \newcommand{\sjtu@acknowledgements}[1]{\long\gdef\sjtu@acknowledgements@body{#1}}
-\NewDocumentEnvironment{acknowledgements}{}
-{\Collect@Body\sjtu@acknowledgements}
-{\ifsjtu@review\relax\else%
+\NewDocumentEnvironment{acknowledgements}{}{%
+  \Collect@Body\sjtu@acknowledgements
+}{%
+  \ifsjtu@review\relax\else
     \cleardoublepage
     \chapter*{\sjtu@label@acknowledgements}
-    \markboth{\sjtu@label@acknowledgements}%
-             {\sjtu@label@acknowledgements}
-    \addcontentsline{toc}{chapter}{\sjtu@label@acknowledgements}
+    \@mkboth{\sjtu@label@acknowledgements}%
+            {\sjtu@label@acknowledgements}%
+    \addcontentsline{toc}{chapter}{\sjtu@label@acknowledgements}%
     \sjtu@acknowledgements@body
-  \fi}
-\NewDocumentEnvironment{sjtu@bibliolist}{o}{%
-  \list%
-    {\@biblabel{\@arabic\c@enumiv}}%
-    {\settowidth\labelwidth{\@biblabel{#1}}
-      \setlength{\labelsep}{\biblabelsep}%
-      \setlength{\leftmargin}{\bibhang}%
-      \addtolength{\leftmargin}{\labelwidth}%
-      \setlength{\itemindent}{0pt}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}%
-  \usecounter{enumiv}%
-  \let\p@enumiv\@empty
-  \renewcommand{\theenumiv}{\@arabic\c@enumiv}}
-{\def\@noitemerr
-  {\@latex@warning{Empty `bibliolist' environment}}%
-  \endlist}
-\NewDocumentEnvironment{publications}{O{99}}
-{\cleardoublepage
-  \chapter{\sjtu@label@publications}
-  \markboth{\sjtu@label@publications}%
-           {\sjtu@label@publications}
-  \begin{sjtu@bibliolist}[#1]}
-{\end{sjtu@bibliolist}}
-\NewDocumentEnvironment{patents}{O{99}}
-{\cleardoublepage
-  \chapter{\sjtu@label@patents}
-  \markboth{\sjtu@label@patents}%
-           {\sjtu@label@patents}
-  \begin{sjtu@bibliolist}[#1]}
-{\end{sjtu@bibliolist}}
-\NewDocumentEnvironment{projects}{O{99}}
-{\cleardoublepage
-  \chapter{\sjtu@label@projects}
-  \markboth{\sjtu@label@projects}%
-           {\sjtu@label@projects}
-  \begin{sjtu@bibliolist}[#1]}
-{\end{sjtu@bibliolist}}
-\newcommand{\sjtu@resume}[1]{\long\gdef\sjtu@resume@body{#1}}
-\NewDocumentEnvironment{resume}{}
-{\Collect@Body\sjtu@resume}
-{\ifsjtu@review\relax\else%
+  \fi
+}
+\newenvironment{sjtu@bibliolist}[2]{%
   \cleardoublepage
-  \chapter{\sjtu@label@resume}
-  \markboth{\sjtu@label@resume}%
-           {\sjtu@label@resume}
-  \sjtu@resume@body
-\fi}
+  \chapter{#2}
+  \@mkboth{#2}{#2}%
+  \list{\@biblabel{\@arabic\c@enumiv}}%
+       {\settowidth\labelwidth{\@biblabel{#1}}%
+        \leftmargin\labelwidth
+        \advance\leftmargin\labelsep
+        \@openbib@code
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+  \sloppy
+  \clubpenalty4000
+  \@clubpenalty \clubpenalty
+  \widowpenalty4000%
+  \sfcode`\.\@m
+}{%
+  \def\@noitemerr
+    {\@latex@warning{Empty `bibliolist' environment}}%
+  \endlist
+}
+\newcommand{\sjtu@publications}[1]{\long\gdef\sjtu@publications@body{#1}}
+\NewDocumentEnvironment{publications}{O{99}}{%
+  \Collect@Body\sjtu@publications
+}{%
+  \ifsjtu@review\relax\else
+    \begin{sjtu@bibliolist}{#1}{\sjtu@label@publications}
+      \sjtu@publications@body
+    \end{sjtu@bibliolist}
+  \fi
+}
+\newcommand{\sjtu@@publications}[1]{\long\gdef\sjtu@@publications@body{#1}}
+\NewDocumentEnvironment{publications*}{O{99}}{%
+  \Collect@Body\sjtu@@publications
+}{%
+  \ifsjtu@review
+    \begin{sjtu@bibliolist}{#1}{\sjtu@label@publications}
+      \sjtu@@publications@body
+    \end{sjtu@bibliolist}
+  \fi
+}
+\newcommand{\sjtu@projects}[1]{\long\gdef\sjtu@projects@body{#1}}
+\NewDocumentEnvironment{projects}{O{99}}{%
+  \Collect@Body\sjtu@projects
+}{%
+  \ifsjtu@review\relax\else
+    \begin{sjtu@bibliolist}{#1}{\sjtu@label@projects}
+      \sjtu@projects@body
+    \end{sjtu@bibliolist}
+  \fi
+}
+\newcommand{\sjtu@@projects}[1]{\long\gdef\sjtu@@projects@body{#1}}
+\NewDocumentEnvironment{projects*}{O{99}}{%
+  \Collect@Body\sjtu@@projects
+}{%
+  \ifsjtu@review
+    \begin{sjtu@bibliolist}{#1}{\sjtu@label@projects}
+      \sjtu@@projects@body
+    \end{sjtu@bibliolist}
+  \fi
+}
+\newcommand{\sjtu@patents}[1]{\long\gdef\sjtu@patents@body{#1}}
+\NewDocumentEnvironment{patents}{O{99}}{%
+  \Collect@Body\sjtu@patents
+}{%
+  \ifsjtu@review\relax\else
+    \begin{sjtu@bibliolist}{#1}{\sjtu@label@patents}
+      \sjtu@patents@body
+    \end{sjtu@bibliolist}
+  \fi
+}
+\newcommand{\sjtu@@patents}[1]{\long\gdef\sjtu@@patents@body{#1}}
+\NewDocumentEnvironment{patents*}{O{99}}{%
+  \Collect@Body\sjtu@@patents
+}{%
+  \ifsjtu@review
+    \begin{sjtu@bibliolist}{#1}{\sjtu@label@patents}
+      \sjtu@@patents@body
+    \end{sjtu@bibliolist}
+  \fi
+}
+\newcommand{\sjtu@resume}[1]{\long\gdef\sjtu@resume@body{#1}}
+\NewDocumentEnvironment{resume}{}{%
+  \Collect@Body\sjtu@resume
+}{%
+  \ifsjtu@review\relax\else
+    \cleardoublepage
+    \chapter{\sjtu@label@resume}
+    \@mkboth{\sjtu@label@resume}%
+            {\sjtu@label@resume}%
+    \sjtu@resume@body
+  \fi
+}
 \AtBeginDocument{
   \ifsjtu@review%
     \sjtuSetInfo{%
@@ -459,19 +627,20 @@
     {#1}
   \fi
 }
-\newcommand{\sjtu@uline}[1]%
-{\begingroup
-  \setbox0=\vbox{\strut #1\strut}%
-  \dimen0=0pt
-  \loop\ifdim\ht0>0pt
-    \dimen1=\dimexpr\ht0 - \baselineskip\relax
-    \setbox1=\vsplit0 to \ht\strutbox
-    \advance\dimen1 by -\ht0
-    \noindent\raisebox{-\dimen0}[\ht\strutbox][\dp\strutbox]{\box1}%
-    \advance\dimen0 by \dimen1
-    \vspace{-0.2ex}\hrule\vskip 0.2ex
-  \repeat
-\endgroup}
+\newcommand{\sjtu@uline}[1]{%
+  \begingroup
+    \setbox0=\vbox{\strut #1\strut}%
+    \dimen0=0pt
+    \loop\ifdim\ht0>0pt
+      \dimen1=\dimexpr\ht0 - \baselineskip\relax
+      \setbox1=\vsplit0 to \ht\strutbox
+      \advance\dimen1 by -\ht0
+      \noindent\raisebox{-\dimen0}[\ht\strutbox][\dp\strutbox]{\box1}%
+      \advance\dimen0 by \dimen1
+      \vspace{-0.2ex}\hrule\vskip 0.2ex
+    \repeat
+  \endgroup
+}
 \hypersetup{
   linktoc            = all,
   bookmarksnumbered  = true,
@@ -498,21 +667,8 @@
   \do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do/\do.\do:%
   \do\*\do\-\do\~\do\'\do\"\do\-}
 \Urlmuskip=0mu plus 0.1mu
-\ifsjtu@bachelor%
-  \AtEndOfClass{\input{sjtuthesis-bachelor.ltx}}
-\else
-  \ifsjtu@master%
-    \AtEndOfClass{\input{sjtuthesis-graduate.ltx}}
-  \fi
-\fi
 \newcommand{\sjtu@atendpackage}{\csname ctex_at_end_package:nn\endcsname}
 \sjtu@atendpackage{unicode-math}{
-  \unimathsetup{
-    math-style = ISO,
-    bold-style = ISO,
-    nabla      = upright,
-    partial    = upright,
-  }
   \newcommand{\bm}{\symbf}
   \renewcommand{\boldsymbol}{\symbf}
   \newcommand{\square}{\mdlgwhtsquare}
@@ -530,7 +686,7 @@
     separate-uncertainty = true,
     inter-unit-product   = \ensuremath{{}\cdot{}},
   }
-  \ifsjtu@chinese
+  \ifsjtu@language@chinese
     \sisetup{
       list-final-separator = { 和 },
       list-pair-separator  = { 和 },
@@ -540,7 +696,7 @@
 }
 \PassOptionsToPackage{amsmath,thmmarks,hyperref}{ntheorem}
 \sjtu@atendpackage{ntheorem}{
-  \ifsjtu@chinese
+  \ifsjtu@language@chinese
     \def\sjtu@label@assertion{断言}
     \def\sjtu@label@assumption{假设}
     \def\sjtu@label@axiom{公理}
@@ -565,24 +721,77 @@
     \def\sjtu@label@remark{Remark}
     \def\sjtu@label@theorem{Theorem}
   \fi
-  \theorembodyfont{\normalfont}
   \theoremheaderfont{\bfseries\heiti}
-  \theoremseparator{\enspace}
+  \theorembodyfont{\normalfont}
+  \theoremseparator{\enskip}
   \theoremsymbol{\ensuremath{\square}}
   \newtheorem*{proof}{\sjtu@label@proof}
   \theoremstyle{plain}
-  \theorembodyfont{\kaishu}
   \theoremsymbol{}
-  \newtheorem{assertion}  {\sjtu@label@assertion}  [chapter]
-  \newtheorem{assumption} {\sjtu@label@assumption} [chapter]
-  \newtheorem{axiom}      {\sjtu@label@axiom}      [chapter]
-  \newtheorem{corollary}  {\sjtu@label@corollary}  [chapter]
-  \newtheorem{definition} {\sjtu@label@definition} [chapter]
-  \newtheorem{example}    {\sjtu@label@example}    [chapter]
-  \newtheorem{lemma}      {\sjtu@label@lemma}      [chapter]
-  \newtheorem{proposition}{\sjtu@label@proposition}[chapter]
-  \newtheorem{remark}     {\sjtu@label@remark}     [chapter]
-  \newtheorem{theorem}    {\sjtu@label@theorem}    [chapter]
+  \newtheorem{theorem}             {\sjtu@label@theorem}    [chapter]
+  \newtheorem{assertion}  [theorem]{\sjtu@label@assertion}
+  \newtheorem{axiom}      [theorem]{\sjtu@label@axiom}
+  \newtheorem{corollary}  [theorem]{\sjtu@label@corollary}
+  \newtheorem{lemma}      [theorem]{\sjtu@label@lemma}
+  \newtheorem{proposition}[theorem]{\sjtu@label@proposition}
+  \newtheorem{assumption}          {\sjtu@label@assumption} [chapter]
+  \newtheorem{definition}          {\sjtu@label@definition} [chapter]
+  \newtheorem{example}             {\sjtu@label@example}    [chapter]
+  \newtheorem*{remark}             {\sjtu@label@remark}
+}
+\sjtu@atendpackage{amsthm}{
+  \ifsjtu@language@chinese
+    \def\sjtu@label@assertion{断言}
+    \def\sjtu@label@assumption{假设}
+    \def\sjtu@label@axiom{公理}
+    \def\sjtu@label@corollary{推论}
+    \def\sjtu@label@definition{定义}
+    \def\sjtu@label@example{例}
+    \def\sjtu@label@lemma{引理}
+    \def\sjtu@label@proof{证明}
+    \def\sjtu@label@proposition{命题}
+    \def\sjtu@label@remark{注}
+    \def\sjtu@label@theorem{定理}
+  \else
+    \def\sjtu@label@assertion{Assertion}
+    \def\sjtu@label@assumption{Assumption}
+    \def\sjtu@label@axiom{Axiom}
+    \def\sjtu@label@corollary{Corollary}
+    \def\sjtu@label@definition{Definition}
+    \def\sjtu@label@example{Example}
+    \def\sjtu@label@lemma{Lemma}
+    \def\sjtu@label@proof{Proof}
+    \def\sjtu@label@proposition{Proposition}
+    \def\sjtu@label@remark{Remark}
+    \def\sjtu@label@theorem{Theorem}
+  \fi
+  \newtheoremstyle{sjtuplain}
+    {}{}
+    {\normalfont}{}
+    {\bfseries\heiti}{}
+    {\ccwd}{}
+  \theoremstyle{sjtuplain}
+  \newtheorem{theorem}             {\sjtu@label@theorem}    [chapter]
+  \newtheorem{assertion}  [theorem]{\sjtu@label@assertion}
+  \newtheorem{axiom}      [theorem]{\sjtu@label@axiom}
+  \newtheorem{corollary}  [theorem]{\sjtu@label@corollary}
+  \newtheorem{lemma}      [theorem]{\sjtu@label@lemma}
+  \newtheorem{proposition}[theorem]{\sjtu@label@proposition}
+  \newtheorem{assumption}          {\sjtu@label@assumption} [chapter]
+  \newtheorem{definition}          {\sjtu@label@definition} [chapter]
+  \newtheorem{example}             {\sjtu@label@example}    [chapter]
+  \newtheorem*{remark}             {\sjtu@label@remark}
+  \renewcommand\proofname\sjtu@label@proof
+  \renewenvironment{proof}[1][\proofname]{\par
+    \pushQED{\qed}%
+    \normalfont \topsep6\p@\@plus6\p@\relax
+    \trivlist
+    \item\relax
+      {\bfseries\heiti #1~}
+      \hspace\labelsep\ignorespaces
+  }{%
+    \popQED\endtrivlist\@endpefalse
+  }
 }
 \PassOptionsToPackage{algochapter}{algorithm2e}
 \sjtu@atendpackage{algorithm2e}{
@@ -591,28 +800,18 @@
                    {\sjtu@label@listalgorithm}
   \SetAlgoCaptionSeparator{~}
   \newcommand{\cftalgpresnum}{\sjtu@label@algorithm~}
-  \newlength{\cftalgnumwidth}
-    \setlength{\cftalgnumwidth}{2.3em}
   \AtEndPreamble{%
+    \newlength{\cftalgindent}
+      \setlength{\cftalgindent}{1.5em}
+    \newlength{\cftalgnumwidth}
+      \setlength{\cftalgnumwidth}{2.3em}
     \newlength{\sjtu@cftalgnumwidth@tmp}
       \settowidth{\sjtu@cftalgnumwidth@tmp}{\cftalgpresnum}
     \addtolength{\cftalgnumwidth}{\sjtu@cftalgnumwidth@tmp}
   }
-  \renewcommand*{\l@algocf}[2]{%
-    \vskip \cftbeforefigskip
-    {\leftskip \cftfigindent\relax
-      \rightskip \@tocrmarg
-      \parfillskip -\rightskip
-      \parindent \cftfigindent\relax\@afterindenttrue
-      \interlinepenalty\@M
-      \leavevmode
-      \@tempdima \cftalgnumwidth\relax
-      \let\@cftbsnum \cftalgpresnum
-      \let\@cftasnum \cftfigaftersnum
-      \let\@cftasnumb \cftfigaftersnumb
-      \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-      {\cftfigfont #1}\nobreak
-      \cftfigfillnum{#2}}%
+  \renewcommand*{\l@algocf}{%
+    \let\@cftbsnum \cftalgpresnum
+    \@dottedtocline{1}{\cftalgindent}{\cftalgnumwidth}
   }
   \renewcommand{\listofalgorithms}{%
     \cleardoublepage%
@@ -628,36 +827,26 @@
 \sjtu@atendpackage{algorithm}{
   \RequirePackage{algorithmicx, algpseudocode}
   \floatname{algorithm}{\sjtu@label@algorithm}
-  \renewcommand{\listalgorithmname}{\sjtu@label@listalgorithm}
   \@addtoreset{algorithm}{chapter}
   \patchcmd\@chapter%
     {\if@twocolumn}
     {\addtocontents{loa}{\protect\addvspace{10\p@}}%
       \if@twocolumn}
     {}{}
+  \renewcommand{\listalgorithmname}{\sjtu@label@listalgorithm}
   \newcommand{\cftalgpresnum}{\sjtu@label@algorithm~}
-  \newlength{\cftalgnumwidth}
-    \setlength{\cftalgnumwidth}{2.3em}
   \AtEndPreamble{%
+    \newlength{\cftalgindent}
+      \setlength{\cftalgindent}{1.5em}
+    \newlength{\cftalgnumwidth}
+      \setlength{\cftalgnumwidth}{2.3em}
     \newlength{\sjtu@cftalgnumwidth@tmp}
       \settowidth{\sjtu@cftalgnumwidth@tmp}{\cftalgpresnum}
     \addtolength{\cftalgnumwidth}{\sjtu@cftalgnumwidth@tmp}
   }
-  \newcommand*{\l@algorithm}[2]{%
-    \vskip \cftbeforefigskip
-    {\leftskip \cftfigindent\relax
-      \rightskip \@tocrmarg
-      \parfillskip -\rightskip
-      \parindent \cftfigindent\relax\@afterindenttrue
-      \interlinepenalty\@M
-      \leavevmode
-      \@tempdima \cftalgnumwidth\relax
-      \let\@cftbsnum \cftalgpresnum
-      \let\@cftasnum \cftfigaftersnum
-      \let\@cftasnumb \cftfigaftersnumb
-      \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-      {\cftfigfont #1}\nobreak
-      \cftfigfillnum{#2}}%
+  \newcommand*{\l@algorithm}{%
+    \let\@cftbsnum \cftalgpresnum
+    \@dottedtocline{1}{\cftalgindent}{\cftalgnumwidth}
   }
   \renewcommand{\listofalgorithms}{%
     \cleardoublepage%

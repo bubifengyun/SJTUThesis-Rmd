@@ -23,7 +23,7 @@
 %% 
 \ProvidesFile{sjtuthesis-bachelor.ltx}
   [2019/06/16 1.0.0rc Shanghai Jiao Tong University Thesis Template]
-\ifsjtu@course
+\ifsjtu@degree@course
   \sjtu@def@label{degreetypeChi}{}
   \sjtu@def@label{degreetypeEng}{}
 \else
@@ -36,7 +36,7 @@
 \sjtu@def@label{coursenameChi}{课程名称}
 \sjtu@def@label{majorChi}{专业}
 \sjtu@def@label{departmentChi}{学院(系)}
-\ifsjtu@course
+\ifsjtu@degree@course
   \sjtu@def@label{thesiscat}{课程论文}
   \def\sjtu@label@thesistype{\sjtu@label@thesiscat}
   \sjtu@def@label{subjectChi}{\sjtu@label@thesiscat}
@@ -53,8 +53,9 @@
   vmargin    = {84bp, 72bp},
   hmargin    = 90bp,
   headheight = 60bp,
-  headsep    = 12bp}
-\ifsjtu@english
+  headsep    = 12bp,
+}
+\ifsjtu@language@english
   \def\sjtu@titlemark{\sjtu@value@entitle}
   \newcommand{\sjtu@fancyhead}{%
     \parbox[b]{0.75\textwidth}{%
@@ -92,62 +93,94 @@
   \cleardoublepage
   \@mainmatterfalse
   \pagenumbering{Roman}
-  \pagestyle{sjtu@front}}
+  \pagestyle{sjtu@front}
+}
 \renewcommand{\mainmatter}{%
   \cleardoublepage
   \@mainmattertrue
+  \sjtu@setfloatfonttrue
   \pagenumbering{arabic}
-  \pagestyle{sjtu@plain}}
+  \pagestyle{sjtu@plain}
+}
+\renewcommand{\backmatter}{%
+  \cleardoublepage
+  \@mainmatterfalse
+}
 \ctexset{%
   subsection/format = \zihao{-4}\normalfont,
 }
 \renewcommand{\cftchapfont}{\normalfont}
 \renewcommand{\cftchapleader}{\normalfont\cftdotfill{\cftdotsep}}
 \renewcommand{\cftchappagefont}{\normalfont}
-\NewDocumentEnvironment{abstract}{}%
-{\cleardoublepage
+\NewDocumentEnvironment{abstract}{}{%
+  \cleardoublepage
   \pdfbookmark[0]{\sjtu@label@abstract}{abstract}
   \chapter*{%
     \sjtu@value@title \vskip 2ex
-    {\zihao{4}\sjtu@label@abstractChi}
+    \begingroup
+      \zihao{4}
+      \sjtu@label@abstractChi
+    \endgroup
   }
-  \markboth{\sjtu@label@abstractChi}%
-           {\sjtu@label@abstractChi}
+  \@mkboth{\sjtu@label@abstractChi}%
+          {\sjtu@label@abstractChi}%
 }{%
   \vskip 3ex \noindent
-  {\zihao{-4}\heiti\sjtu@label@keywordsChi}{\zihao{5}\sjtu@value@keywords}
+  \begingroup
+    \zihao{-4}
+    \heiti\sjtu@label@keywordsChi
+  \endgroup
+  \begingroup
+    \zihao{5}
+    \sjtu@value@keywords
+  \endgroup
 }
 \NewDocumentEnvironment{enabstract}{}{%
   \cleardoublepage
   \chapter*{%
     \MakeUppercase\sjtu@value@entitle \vskip 2ex
-    {\zihao{4}\MakeUppercase\sjtu@label@abstractEng}}
-  \markboth{\sjtu@label@abstractEng}%
-           {\sjtu@label@abstractEng}
+    \begingroup
+      \zihao{4}
+      \MakeUppercase\sjtu@label@abstractEng
+    \endgroup
+  }
+  \@mkboth{\sjtu@label@abstractEng}%
+          {\sjtu@label@abstractEng}%
 }{%
   \vskip 3ex \noindent
-  {\zihao{-4}\bfseries\sjtu@label@keywordsEng}
-  {\zihao{5}\sjtu@value@enkeywords}}
+  \begingroup
+    \zihao{-4}\bfseries
+    \sjtu@label@keywordsEng
+  \endgroup
+  \begingroup
+    \zihao{5}
+    \sjtu@value@enkeywords
+  \endgroup
+}
 \newcommand{\sjtu@bigabstract}[1]{\long\gdef\sjtu@bigabstract@body{#1}}
-\NewDocumentEnvironment{bigabstract}{}
-{\Collect@Body\sjtu@bigabstract}
-{\ifsjtu@course\relax\else%
-  \ifsjtu@english\relax\else%
-    \AtEndDocument{%
-      \cleardoublepage
-      \pagenumbering{roman}
-      \pagestyle{sjtu@biglast}
-      \pdfbookmark[0]{\sjtu@label@bigabstract}{bigabstract}%
-      \chapter*{\MakeUppercase\sjtu@value@entitle}
-      \sjtu@bigabstract@body
-    }
+\NewDocumentEnvironment{bigabstract}{}{%
+  \Collect@Body\sjtu@bigabstract
+}{%
+  \ifsjtu@degree@course\relax\else
+    \ifsjtu@language@english\relax\else
+      \AtEndDocument{%
+        \cleardoublepage
+        \pagenumbering{roman}
+        \pagestyle{sjtu@biglast}
+        \pdfbookmark[0]{\sjtu@label@bigabstract}{bigabstract}%
+        \chapter*{\MakeUppercase\sjtu@value@entitle}
+        \@mkboth{\sjtu@label@bigabstract}%
+                {\sjtu@label@bigabstract}%
+        \sjtu@bigabstract@body
+      }
+    \fi
   \fi
-\fi}
+}
 \RenewDocumentCommand\maketitle{}{%
   \pdfbookmark[0]{\sjtu@label@titlepage}{titlepage}
   \sjtu@makechinesetitle%
 }
-\newcommand{\sjtu@makechinesetitle}{
+\newcommand{\sjtu@makechinesetitle}{%
   \cleardoublepage
   \thispagestyle{empty}
   \begin{center}
@@ -161,35 +194,40 @@
     \vskip 16bp
     \includegraphics{sjtu-badge.pdf}
     \vskip \stretch{2}
-    {\zihao{2}
+    \begingroup
+      \zihao{2}
       \begin{tabular}{r@{：}l}
         论文题目 &
-        \begin{minipage}[t]{300pt}
+        \begin{minipage}[t]{280pt}
           \zihao{-2}
           \begin{center}
             \sjtu@uline\sjtu@value@title
           \end{center}
         \end{minipage}
-      \end{tabular}}
+      \end{tabular}
+    \endgroup
     \vskip \stretch{1}
-    {\zihao{3}
+    \begingroup
+      \zihao{3}
       \def\arraystretch{1.1}
       \begin{tabular}
         {>{\begin{CJKfilltwosides}{4\ccwd}}r<{\end{CJKfilltwosides}}@{：}c}
         \sjtu@label@authorChi        & \sjtu@value@author      \\ \cline{2-2}
         \sjtu@label@studentidChi     & \makebox[180pt]{\sjtu@value@studentid} \\
           \cline{2-2}
-        \ifsjtu@course
+        \ifsjtu@degree@course
           \sjtu@label@coursenameChi  & \sjtu@value@coursename  \\ \cline{2-2}
         \else
           \sjtu@label@majorChi       & \sjtu@value@major       \\ \cline{2-2}
         \fi
         \sjtu@label@supervisorChi    & \sjtu@value@supervisor  \\ \cline{2-2}
         \sjtu@label@departmentChi    & \sjtu@value@department  \\ \cline{2-2}
-      \end{tabular}}
+      \end{tabular}
+    \endgroup
     \vskip 40bp
   \end{center}
-  \cleardoublepage}
+  \cleardoublepage
+}
 \endinput
 %%
 %% End of file `sjtuthesis-bachelor.ltx'.

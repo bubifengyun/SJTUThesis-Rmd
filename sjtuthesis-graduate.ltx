@@ -23,7 +23,7 @@
 %% 
 \ProvidesFile{sjtuthesis-graduate.ltx}
   [2019/06/16 1.0.0rc Shanghai Jiao Tong University Thesis Template]
-\ifsjtu@doctor
+\ifsjtu@degree@doctor
   \sjtu@def@label{degreetypeChi}{博士}
   \sjtu@def@label{degreetypeEng}{Doctor}
 \else
@@ -65,7 +65,9 @@
   bottom     = 4.0cm,
   left       = 3.3cm,
   right      = 2.8cm,
-  headsep    = 0.5cm}
+  headheight = 1.0cm,
+  headsep    = 0.5cm,
+}
 \newcommand{\sjtu@fancyfoot}[2]{
   \ifsjtu@review\relax\else
     \ifx#2\@empty\else
@@ -91,59 +93,84 @@
   \fancyfoot[C]{\small ---~{\bfseries\thepage}~---}
   \renewcommand{\headrule}{%
     \hrule\@height2.25\p@\@width\headwidth
-    \vskip0.75\p@
+    \vskip 0.75\p@
     \hrule\@height0.75\p@\@width\headwidth
-    \vskip-2.75\p@
+    \vskip -2.75\p@
   }
 }
 \renewcommand{\frontmatter}{%
   \cleardoublepage
   \@mainmatterfalse
   \pagenumbering{Roman}
-  \pagestyle{sjtu@plain}}
+  \pagestyle{sjtu@plain}
+}
 \renewcommand{\mainmatter}{%
   \cleardoublepage
   \@mainmattertrue
+  \sjtu@setfloatfonttrue
   \pagenumbering{arabic}
-  \pagestyle{sjtu@plain}}
+  \pagestyle{sjtu@plain}
+}
+\renewcommand{\backmatter}{%
+  \cleardoublepage
+  \@mainmatterfalse
+}
 \renewcommand{\cftchapfont}{\bfseries\heiti}
 \renewcommand{\cftchapleader}{\normalfont\cftdotfill{\cftdotsep}}
-\NewDocumentEnvironment{abstract}{}%
-{\cleardoublepage
+\NewDocumentEnvironment{abstract}{}{%
+  \cleardoublepage
   \pdfbookmark[0]{\sjtu@label@abstract}{abstract}
   \chapter*{%
     \sjtu@value@title \vskip 2ex
-    \sjtu@label@abstractChi
+    \begingroup
+      \sjtu@label@abstractChi
+    \endgroup
   }
-  \markboth{\sjtu@label@abstractChi}%
-           {\sjtu@label@abstractChi}
+  \@mkboth{\sjtu@label@abstractChi}%
+          {\sjtu@label@abstractChi}%
   \zihao{4}
 }{%
   \vskip 3ex \noindent
-  {\heiti\sjtu@label@keywordsChi}\sjtu@value@keywords
+  \begingroup
+    \heiti\sjtu@label@keywordsChi
+  \endgroup
+  \begingroup
+    \sjtu@value@keywords
+  \endgroup
 }
 \NewDocumentEnvironment{enabstract}{}{%
   \cleardoublepage
   \chapter*{%
     \MakeUppercase\sjtu@value@entitle \vskip 2ex
-    \MakeUppercase\sjtu@label@abstractEng}
-  \markboth{\sjtu@label@abstractEng}%
-           {\sjtu@label@abstractEng}
+    \begingroup
+      \MakeUppercase\sjtu@label@abstractEng
+    \endgroup
+  }
+  \@mkboth{\sjtu@label@abstractEng}%
+          {\sjtu@label@abstractEng}%
   \zihao{4}
 }{%
   \vskip 3ex \noindent
-  {\bfseries\MakeUppercase\sjtu@label@keywordsEng}
-  \sjtu@value@enkeywords}
+  \begingroup
+    \bfseries\MakeUppercase
+    \sjtu@label@keywordsEng
+  \endgroup
+  \begingroup
+    \sjtu@value@enkeywords
+  \endgroup
+}
 \newcommand{\sjtu@bigabstract}[1]{\long\gdef\sjtu@bigabstract@body{#1}}
-\NewDocumentEnvironment{bigabstract}{}
-{\Collect@Body\sjtu@bigabstract}
-{}
+\NewDocumentEnvironment{bigabstract}{}{%
+  \Collect@Body\sjtu@bigabstract
+}{%
+  \relax
+}
 \RenewDocumentCommand\maketitle{}{%
   \pdfbookmark[0]{\sjtu@label@titlepage}{titlepage}
   \sjtu@makechinesetitle%
   \sjtu@makeenglishtitle%
 }
-\newcommand{\sjtu@makechinesetitle}{
+\newcommand{\sjtu@makechinesetitle}{%
   \cleardoublepage
   \thispagestyle{sjtu@title}
   \begin{center}
@@ -152,7 +179,8 @@
     \vskip \stretch{4}
     {\zihao{2}\heiti\sjtu@value@title \vskip 1bp}
     \vskip \stretch{5}
-    {\zihao{4}
+    \begingroup
+      \zihao{4}
       \def\tabcolsep{1bp}
       \def\arraystretch{1.25}
       \begin{tabular}
@@ -169,10 +197,12 @@
         \sjtu@label@departmentChi       & \sjtu@value@department     \\
         \sjtu@label@defenddateChi       & \sjtu@value@date           \\
         \sjtu@label@conferringChi       & \sjtu@label@schoolChi      \\
-      \end{tabular}}
+      \end{tabular}
+    \endgroup
     \vskip 26bp
   \end{center}
-  \cleardoublepage}
+  \cleardoublepage
+}
 \newcommand{\sjtu@makeenglishtitle}{%
   \cleardoublepage
   \thispagestyle{sjtu@entitle}
@@ -182,11 +212,12 @@
     \vskip \stretch{4}
     {\zihao{2}\bfseries\MakeUppercase\sjtu@value@entitle \vskip 1bp}
     \vskip \stretch{5}
-    {\zihao{4}
+    \begingroup
+      \zihao{4}
       \def\tabcolsep{1bp}
       \def\arraystretch{1.3}
       \begin{tabular}
-        {>{\bfseries}l<{:~}l}
+        {>{\bfseries}l<{:~}p{.45\textwidth}}
         \sjtu@label@authorEng           & \sjtu@value@enauthor         \\
         \sjtu@label@studentidEng        & \sjtu@value@studentid        \\
         \sjtu@label@supervisorEng       & \sjtu@value@ensupervisor     \\
@@ -198,10 +229,12 @@
         \sjtu@label@departmentEng       & \sjtu@value@endepartment     \\
         \sjtu@label@defenddateEng       & \sjtu@value@endate           \\
         \sjtu@label@conferringEng       & \sjtu@label@schoolEng        \\
-      \end{tabular}}
+      \end{tabular}
+    \endgroup
     \vskip 26bp
   \end{center}
-  \cleardoublepage}
+  \cleardoublepage
+}
 \endinput
 %%
 %% End of file `sjtuthesis-graduate.ltx'.

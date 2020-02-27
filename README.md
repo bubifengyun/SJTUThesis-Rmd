@@ -1,12 +1,9 @@
 # 上海交通大学学位论文 Bookdown 模板
 
+**当前改版中，问题非常多，不建议再使用了！！！（2020.02.27）**
+
 这是为撰写上海交通大学学士、硕士或博士论文而准备的 Bookdown 模板，非官方出品。详细使用说明参见本模板内容。根据最新(2019.06.28)的[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)， 参考[谢益辉Bookdown中文模板](https://github.com/yihui/bookdown-chinese)，非常感谢[@AlexaraWu](https://github.com/AlexaraWu)的支持，改写而成。在完全兼容[原交大论文LaTeX模板](https://github.com/sjtug/SJTUThesis)的基础上，通过使用 Markdown，大幅度降低撰写论文的难度，引入 R 语言，提高论文作图、数据处理的能力，真正做到让论文能够随着数据变化而变化，而不是数据错误了，要逐个手动改变。对于无法使用 Rmarkdown 实现的内容，完全复制粘贴 LaTeX 代码也能够运行，可能会多一些括号之类的，请删除。
 
-**本模板会保持sjtuthesis.cls和sjtuthesis.cfg两个文件跟原论文模板一致。**
-
-## 封面展示
-
-略
 
 ## 如何使用
 
@@ -28,6 +25,7 @@ SJTUThesis-Rmd 是一个刚刚启动的开源项目，我们非常欢迎新的�
 
 ## 后续工作计划
 
+- 兼容最新的SJTUThesis-v1.0.0rc4模板。
 - 提供更多 `pandoc` 标准的 markdown 例子。
 - 增加虚拟机编译环境，方便众多小白使用。
 
@@ -45,4 +43,8 @@ SJTUThesis-Rmd 是一个刚刚启动的开源项目，我们非常欢迎新的�
 
 ## 软件许可证
 
-上海交通大学校徽图片(`sjtulogo.pdf` 等)的版权归上海交通大学所有，部分文件的作者实行共享版权。其他部分使用 [Apache License 2.0](LICENSE) 授权。
+上海交通大学校徽校名图片（`sjtu-logo.pdf` 等）的版权归上海交通大学所有。
+
+`sjtuthesis.cls` 文档类与相关附属文件，以及 `biblatex-gb7714-2015` 样式文件使用 [LPPL](https://www.latex-project.org/lppl.txt) 授权。
+
+其他部分使用 [Apache License 2.0](LICENSE) 授权。
