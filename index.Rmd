@@ -38,7 +38,7 @@ knit_hooks$set(plot = function(x, options) {
 title: "上海交通大学论文 Rmd bookdown 模板"
 author: "某 \\quad 某"
 documentclass: sjtuthesis
-classoption: [degree=doctor, unsetfont, openright, twoside]
+classoption: [degree=master, zihao=-4]
 studentid: B1103492
 supervisor: "深度操作系统"
 major: "通信与信息系统"

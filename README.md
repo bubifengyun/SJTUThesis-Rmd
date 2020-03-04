@@ -1,15 +1,15 @@
 # 上海交通大学学位论文 Bookdown 模板
 
-**当前改版中，问题非常多，不建议再使用了！！！（2020.02.27）**
+当前可以编译运行。
 
-这是为撰写上海交通大学学士、硕士或博士论文而准备的 Bookdown 模板，非官方出品。详细使用说明参见本模板内容。根据最新(2019.06.28)的[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)， 参考[谢益辉Bookdown中文模板](https://github.com/yihui/bookdown-chinese)，非常感谢[@AlexaraWu](https://github.com/AlexaraWu)的支持，改写而成。在完全兼容[原交大论文LaTeX模板](https://github.com/sjtug/SJTUThesis)的基础上，通过使用 Markdown，大幅度降低撰写论文的难度，引入 R 语言，提高论文作图、数据处理的能力，真正做到让论文能够随着数据变化而变化，而不是数据错误了，要逐个手动改变。对于无法使用 Rmarkdown 实现的内容，完全复制粘贴 LaTeX 代码也能够运行，可能会多一些括号之类的，请删除。
+这是为撰写上海交通大学学士、硕士或博士论文而准备的 Bookdown 模板，非官方出品。详细使用说明参见本模板内容。根据最新(2019.10.21)的[上海交通大学学位论文Latex模板1.0.0rc4](https://github.com/sjtug/SJTUThesis)， 参考[谢益辉Bookdown中文模板](https://github.com/yihui/bookdown-chinese)，非常感谢[@AlexaraWu](https://github.com/AlexaraWu)的支持，改写而成。在完全兼容[原交大论文LaTeX模板](https://github.com/sjtug/SJTUThesis)的基础上，通过使用 Markdown，大幅度降低撰写论文的难度，引入 R 语言，提高论文作图、数据处理的能力，真正做到让论文能够随着数据变化而变化，而不是数据错误了，要逐个手动改变。对于无法使用 Rmarkdown 实现的内容，完全复制粘贴 LaTeX 代码也能够运行，可能会多一些括号之类的，请删除。
 
 
 ## 如何使用
 
 请先阅读[上海交通大学学位论文Latex模板](https://github.com/sjtug/SJTUThesis)的软件要求，这也是本模板的要求，然后安装 Pandoc，R 和 make 即可，如果可以安装 RStudio 更好。
 
-详情参阅[这里](./rmd/101-intro.Rmd)
+如果您懒得制作安装环境，也可用参考[这里](https://github.com/bubifengyun/deepin-bible)的虚拟机运行方式，直接编译运行。
 
 ## 反馈问题
 
@@ -27,7 +27,6 @@ SJTUThesis-Rmd 是一个刚刚启动的开源项目，我们非常欢迎新的�
 
 - 兼容最新的SJTUThesis-v1.0.0rc4模板。
 - 提供更多 `pandoc` 标准的 markdown 例子。
-- 增加虚拟机编译环境，方便众多小白使用。
 
 ## 致谢
 
